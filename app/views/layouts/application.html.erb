@@ -9,6 +9,15 @@
   </head>
 
   <body>
+  <div class="container">
+        <% unless notice.nil? %>
+            <div class="alert alert-info"><%= notice %></div>
+        <% end %>
+
+        <% unless alert.nil? %>
+            <div class="alert alert-warning"><%= alert %></div>
+        <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
