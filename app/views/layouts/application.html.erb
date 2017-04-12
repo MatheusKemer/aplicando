@@ -1,23 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Iac</title>
-    <%= csrf_meta_tags %>
+<head>
+  <style>
+    body{
+      width:100%;
+      min-width: 300px;
+    }
+    .nav-main{
+      position: relative;
+      display: inline;
+    }
+    .log{
+      display: inline;
+      float: right;
+      margin-right: 5%;
+    }
+  </style>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    "application", media: "all", 
+  																					"data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application",
+																						"data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%if user_signed_in?%>
+    <div class="container">
+      <nav class="nav-main">
+        <%= link_to "#{I18n.t("student.title")}", students_path %>
+        <%= link_to "#{I18n.t("nav.about")}", about_us_path, class: "btn
+  																					 btn-default nav-btn", id: "about" %>
+        <%= link_to "#{I18n.t("nav.faq")}", faq_path, class: "btn btn-default nav-btn" %>
+        <%= link_to "#{I18n.t("nav.help")}", help_path, class: "btn btn-default nav-btn"
+  %>
+      </nav>
+        <nav class="log">
+          <span><%=" #{I18n.t("user.logged_as")} #{current_user.email}"%></span>
+          <%= link_to("#{I18n.t("user.logout")}", destroy_user_session_path, :method => :delete) %>  
+        </nav>
+  <%else%>
+    <%la = request.original_url.split('/').last%>
+    <% if (la != "sign_in" && la != "sign_up") %>
+    <%   %>
+      <nav class="log">
+        <%= link_to("#{I18n.t("user.login")}", new_user_session_path)  %>  
+      </nav>
+    <% end %>
+  <%end%>
+  <% if flash[:notice] || flash[:error] %>
+    <h3><%= flash[:notice] || flash[:error] %></h3>
+  <% end %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-  <div class="container">
-        <% unless notice.nil? %>
-            <div class="alert alert-info"><%= notice %></div>
-        <% end %>
-
-        <% unless alert.nil? %>
-            <div class="alert alert-warning"><%= alert %></div>
-        <% end %>
-    </div>
-    <%= yield %>
-  </body>
+  <%= yield %>
+  
+    
+  
+  </div>
+</body>
 </html>

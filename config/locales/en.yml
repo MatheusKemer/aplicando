@@ -20,4 +20,17 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  nav:
+    help: "Help me"
+    faq: "FAQ"
+    about: "About us"
+  exam:
+    title: "Title"
+    class: "Class"
+    students: "Students"
+  user:
+    logged_as: "Logged as"
+    logout: "Logout"
+    login: "Login"
+  student:
+    title: "Student"

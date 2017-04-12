@@ -1,0 +1,11 @@
+<h1><%= @question.title %></h1>
+<p><%= @question.description %>
+<p><%= @question.created_at.strftime("%Y-%b-%d") %>
+
+<br>
+
+<%= link_to "Edit", edit_question_path(@question) %>
+
+<br>
+
+<%= link_to "All Questions", questions_path %>

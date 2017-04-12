@@ -1,0 +1,20 @@
+<%= simple_form_for(@exam) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+  </div>
+  
+  <div class="form-inputs">
+    <%= f.input :turma_id %>
+  </div>
+   
+  <div class="form-inputs">
+  <%  %>
+  	<%Question.all.each do |q|%> 
+    	<input type="checkbox" value="<%=q.id%>"> <%=q.pergunta%>
+  	<%end%>
+  </div> 
+
+    <%= f.submit %>
+<% end %>

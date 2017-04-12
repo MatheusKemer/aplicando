@@ -1,0 +1,37 @@
+<html>
+	<body>	
+
+		<h1> Tela geral do professor </h1>
+
+		<%= link_to 'Provas do professor', exams_path %>
+
+		<h1>Exemplo de prova: </h1>
+  <%= form_tag("/dones/teste", :method => "post") do %>
+  <%#= form_for @exam do |exam|%>
+  <p>
+  	<%# %>
+  	<% @exam.questions.each do |question|%>
+  		<strong> <%=question.pergunta%>? </strong>
+  		<br />
+      <input type=hidden >
+		  <%question.answers.each do |answer|%>		 <!--question.position-->
+		    <span> <input type="radio" name="<%=answer.question_id%>" value="<%=@exam.id%>+<%=answer.id%>" %>
+        <%=answer.resposta%> </span>
+  	   	<%#= label_tag("choice_".concat(question.id.to_s).to_sym, choice.resposta) %>
+        <%#= radio_button_tag(:choice, choice.id) %>  
+      <%end%>
+  		<br />
+    <% end %>
+      </p>
+  <input type="hidden" name="prova_id" value="<%=@exam.id%>">
+  <input type="hidden" name="all" value="<%current_user.id%>">
+  <br />
+  <%= submit_tag("Enviar") %>
+
+  <% for i in 0..@exam.questions.count-1 do %>
+  	<%= @exam.question[i] %>
+  <% end %>
+
+
+	</body>
+</html>
