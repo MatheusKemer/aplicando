@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicando é um projeto interdisciplinas que tem como objetivo a criação de um sistema 
+de compartilhamento de questões e provas entre professores, além da possibilidade de 
+alunos se cadastrarem para resolver tais provas e questões.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Projeto desenvolvido em Ruby on Rail, com auxílio de CSS e Jquery
