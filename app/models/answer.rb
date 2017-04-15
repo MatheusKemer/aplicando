@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
 	#has_many :questions	
-	belongs_to :questions, optional: true
+	belongs_to :question
 	#before_save :add_question
 	
 	def add_question

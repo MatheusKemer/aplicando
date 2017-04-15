@@ -27,7 +27,7 @@
   <%if user_signed_in?%>
     <div class="container">
       <nav class="nav-main">
-        <%= link_to "#{I18n.t("student.title")}", students_path %>
+        <%= link_to "#{I18n.t("exam.name")}", exams_path %>
         <%= link_to "#{I18n.t("nav.about")}", about_us_path, class: "btn
   																					 btn-default nav-btn", id: "about" %>
         <%= link_to "#{I18n.t("nav.faq")}", faq_path, class: "btn btn-default nav-btn" %>
@@ -35,7 +35,7 @@
   %>
       </nav>
         <nav class="log">
-          <span><%=" #{I18n.t("user.logged_as")} #{current_user.email}"%></span>
+          <span><%=" #{I18n.t("user.logged_as")} #{Student.where(id: current_user.id).first.name}"%></span>
           <%= link_to("#{I18n.t("user.logout")}", destroy_user_session_path, :method => :delete) %>  
         </nav>
   <%else%>

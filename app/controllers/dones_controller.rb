@@ -4,57 +4,76 @@ class DonesController < ApplicationController
   # GET /dones
   # GET /dones.json
   def index
-    @dones = Done.all
+    @dones = Done.where(student_id == current_user.id)
   end
 
   # GET /dones/1
   # GET /dones/1.json
   def show
+    return
   end
 
   # GET /dones/new
   def new
-    @done = Done.new
+    return
   end
 
   # GET /dones/1/edit
   def edit
+    return
   end
 
   def criar
     return unless user_signed_in?
+    
     array = []  #Definindo um array vazio para jogar as respostas do aluno
     exam = Exam.find(params["prova_id"])
     total = exam.questions.count #Puxando o total de questões da prova a partir da prova_id nos params
     for i in 0..total-1 do #Fazendo um loop para percorrer cada questão
-      array[i] = params["#{i}"]  #Jogando dentro do array as respostas do aluno, respeitando a poição de cada questão
-    end  
-    binding.pry
-    Done.create exam_id: exam.id, students_id: current_user.id, respostas: array 
-    certas = []
-    i = 0
-    exam.questions.each do |q|
-      certas = q.id if q.correct == array[i].to_i
-      i += 1 
+      array[i] = params["#{i}"]  #Jogando dentro do array os ID's das respostas do aluno, respeitando a posição de cada questão
     end 
+    binding.pry
+    @done = Done.new(exam_id: exam.id, student_id: current_user.id, respostas: array, finished_at: Time.current) #Criando tabela respostas
+    #@done.save! if Done.where(exam_id: exam.id, student_id: current_user.id).blank? #Verificando se já não há respostas do aluno para essa prova
+    if @done.save 
+      flash[:notice] = "Finalizada"
+      redirect_to @done
+    else
+      flash[:notice] = @done.errors.full_messages
+      redirect_to @done
+    end
+    #nota = calcular_nota
+    certas = [] #criando o array onde será inserido os ID's das questões corretas
+    i = 0 # Definindo um contador
+    exam.questions.each do |q| 
+      certas << q.id if q.correct == array[i].to_i #Comparando se o ID da resposta correta da questão é o mesmo que o ID que o aluno escolheu
+      i += 1 
+    end
+    each_question_value = 10/total
+    nota = certas.size*each_question_value
     #10 divididos pelo número_questões para saber quanto vale cada questão
     binding.pry
+  end
+
+  def calcular_nota
     
   end
 
   # POST /dones
   # POST /dones.json
   def create
-     
-    @done = Done.new(done_params)
+    binding.pry
+    if Done.where(exam_id: exam.id, student_id: current_user.id).any?
+      @done = Done.new(done_params)
 
-    respond_to do |format|
-      if @done.save
-        format.html { redirect_to @done, notice: 'Done was successfully created.' }
-        format.json { render :show, status: :created, location: @done }
-      else
-        format.html { render :new }
-        format.json { render json: @done.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @done.save
+          format.html { redirect_to @done, notice: 'Done was successfully created.' }
+          format.json { render :show, status: :created, location: @done }
+        else
+          format.html { render :new }
+          format.json { render json: @done.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

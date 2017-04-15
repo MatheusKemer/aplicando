@@ -71,7 +71,7 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-       
+       binding.pry
       exam = params.require(:exam)
       questions = exam.require(:question_ids)
       var = questions.map {|a| a unless a == ""}

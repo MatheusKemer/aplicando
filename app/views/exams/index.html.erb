@@ -20,8 +20,9 @@
 	
   <td>
     <a>
-      <% exam.students.each do |student|%>
-        <%=link_to student.name %>
+      <%# exam.students.each do |student|%>
+      <% Done.where(exam_id: exam.id).each do |done|%>
+        <%=link_to done.student.name %>
         <%#   %>
       <% end %>
     </a>

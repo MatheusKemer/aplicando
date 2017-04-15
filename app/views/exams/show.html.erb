@@ -1,37 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @exam.title %>
-</p>
-<%#   %>
-
-
-
-<%# if current_user.dones.each {|d| false if d.id == @exam.id}%>
-
-
-
-  <% array = @exam.questions.map {|q| q.id}%>
-  <%= array%>
-  <br />
-  <%= form_tag("/dones/teste", :method => "post") do %>
-    <% for i in 0..@exam.questions.count-1 do %>
-      <%= @exam.questions[i].pergunta %>
+<%a=nil%>
+<%#a = Done.all.map {|d| d if d.student_id == current_user.id && d.exam_id == @exam.id} %>
+<%a = Done.where student_id: current_user.id, exam_id: @exam.id%>
+<% if user_signed_in? %>
+  <%if a.empty?%> 
+    <p id="notice"><%= notice %></p>
+    <p>
+      <strong>Title:</strong>
+      <%= @exam.title %>
+    </p>
+    <%#   %>
+    <%# if current_user.dones.each {|d| false if d.id == @exam.id}%>
+      <% array = @exam.questions.map {|q| q.id}%>
+      <%= array%>
       <br />
-      <% @exam.questions[i].answers.each do |answer|%>
-       <span> <input type="radio" name="<%=i%>" value="<%=answer.id%>" %>
-          <%=answer.resposta%> </span>
-      <br />
+      <%= form_tag("/dones/teste", :method => "post") do %>
+        <% for i in 0..@exam.questions.count-1 do %>
+          <%= @exam.questions[i].pergunta %>
+          <br />
+          <% @exam.questions[i].answers.each do |answer|%>
+           <span> <input type="radio" name="<%=i%>" value="<%=answer.id%>" %>
+              <%=answer.resposta%> </span>
+          <br />
+          <% end %>
+          <br />
+        <% end %>
+      <input type="hidden" name="prova_id" value="<%=@exam.id%>">
+      <input type="hidden" name="all" value="teste">
+      <%= submit_tag("Enviar") %>
       <% end %>
-      <br />
-    <% end %>
-  <input type="hidden" name="prova_id" value="<%=@exam.id%>">
-  <input type="hidden" name="all" value="teste">
-  <%= submit_tag("Enviar") %>
+
+    <%#end%> 
+
+    <%= link_to 'Edit', edit_exam_path(@exam) %> |
+    <%= link_to 'Back', exams_path %>
+  <% else %>
+  <div style="text-align: left">
+    <%= render 'done', exam: @exam%>
+  <div>
   <% end %>
-
-<%#end%> 
-
-<%= link_to 'Edit', edit_exam_path(@exam) %> |
-<%= link_to 'Back', exams_path %>
+<%else%>
+  <h3> Vocẽ não está logado </h3>
+<%end%>

@@ -1,4 +1,4 @@
-class Student < User
+class Student < ApplicationRecord
 	has_and_belongs_to_many :exams
 	belongs_to :turma, optional: true
 	has_many :dones

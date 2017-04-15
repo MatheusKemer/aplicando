@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407172713) do
+ActiveRecord::Schema.define(version: 20170331223356) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "resposta"
@@ -21,12 +21,11 @@ ActiveRecord::Schema.define(version: 20170407172713) do
 
   create_table "dones", force: :cascade do |t|
     t.text     "respostas"
-    t.integer  "students_id"
-    t.integer  "exam_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "finished_at", null: false
+    t.integer  "student_id",  null: false
+    t.integer  "exam_id",     null: false
     t.index ["exam_id"], name: "index_dones_on_exam_id"
-    t.index ["students_id"], name: "index_dones_on_students_id"
+    t.index ["student_id"], name: "index_dones_on_student_id"
   end
 
   create_table "exams", force: :cascade do |t|
@@ -82,6 +81,9 @@ ActiveRecord::Schema.define(version: 20170407172713) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -92,9 +94,7 @@ ActiveRecord::Schema.define(version: 20170407172713) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "type"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.boolean  "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

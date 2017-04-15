@@ -25,12 +25,16 @@ en:
     faq: "FAQ"
     about: "About us"
   exam:
+    name: "Exams"
     title: "Title"
     class: "Class"
     students: "Students"
+    done: "Vocẽ já fez essa prova"
   user:
     logged_as: "Logged as"
     logout: "Logout"
     login: "Login"
   student:
     title: "Student"
+  error:
+    exam_already_exists: "Already exists"

@@ -8,12 +8,13 @@
   <div class="form-inputs">
     <%= f.input :turma_id %>
   </div>
-   
+
   <div class="form-inputs">
-  <%  %>
+  <%i=0%>
   	<%Question.all.each do |q|%> 
-    	<input type="checkbox" value="<%=q.id%>"> <%=q.pergunta%>
-  	<%end%>
+      <input type="checkbox" name="<%=i%>" value="true" %> <%=q.pergunta%> 
+      <%i+=1%>
+    <%end%>
   </div> 
 
     <%= f.submit %>

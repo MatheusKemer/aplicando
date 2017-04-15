@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 end
   resources :exams
   resources :students
-  get "/" => "home#index"	
+  get "/" => "exams#index"	
 
   get "/student_dones/:student_id/:done_id" => "dones#show"
 

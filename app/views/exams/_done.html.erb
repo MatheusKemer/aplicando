@@ -1,0 +1,14 @@
+<h4> <%=I18n.t("exam.done")%></h4>
+
+<%respostas = Done.where(exam_id: @exam.id, student_id: current_user.id).first.respostas%>
+<%i=0%>
+<ol>
+<%@exam.questions.each do |q|%>
+  <li><%= q.pergunta %>
+    <br />
+    <%=q.answers.where(id: respostas[i]).first.resposta%>
+    <%i+=1%>
+  <br />
+  <br />
+<% end %>
+</ol>
