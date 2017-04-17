@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Exams</h1>
+<h1>Your Exams</h1>
 
 <table>
   <thead>
@@ -9,30 +9,32 @@
       <th><%=I18n.t("exam.class")%></th>
       <th><%=I18n.t("exam.students")%></th>
       <th colspan="3"></th>
+      <th> Done? </th>
     </tr>
   </thead>
 
   <tbody>
-    <% @exams.each do |exam| %>
-      <tr>
-        <td><%= exam.title %></td>
-	<td><%= exam.turma_id %></td>
-	
-  <td>
-    <a>
-      <%# exam.students.each do |student|%>
-      <% Done.where(exam_id: exam.id).each do |done|%>
-        <%=link_to done.student.name %>
-        <%#   %>
-      <% end %>
-    </a>
-  </td>        
-	
-        <td><%= link_to 'Show', exam %></td>
-        <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
-        <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
-	</tr>
+  <%binding.pry%>
+  <% student_exams = @exams.map {|e| e.students.include? Student.find(current_user.id)}%>
+  <% student_exams.each do |exam| %>
+    <tr>
+      <td><%= exam.title %></td>
+    	<td><%= exam.turma_id %></td>	
+      <td>
+        <a>
+          <%# exam.students.each do |student|%>
+          <% Done.where(exam_id: exam.id).each do |done|%>
+            <%=link_to done.student.name %>
+            <%#   %>
+          <% end %>
+        </a>
+      </td>        
+      <td><%= link_to 'Show', exam %></td>
+      <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
+      <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%>SIM<%end%></td>
+  	</tr>
+  <% end %>
   </tbody>
 </table>
 

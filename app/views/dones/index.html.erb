@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Prova</th>
+      <th>Nota</th>
       <th>Respostas</th>
       <th colspan="3"></th>
     </tr>
@@ -13,6 +15,8 @@
   <tbody>
     <% @dones.each do |done| %>
       <tr>
+        <td><%= link_to Exam.where(id: done.exam_id).first.title, Exam.where(id: done.exam_id).first %></td>
+        <td><%= done.nota%></td>
         <td><%= done.respostas %></td>
         <td><%= link_to 'Show', done %></td>
         <td><%= link_to 'Edit', edit_done_path(done) %></td>

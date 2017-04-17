@@ -1,9 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Prova:</strong>
+  <%= link_to Exam.where(id: @done.exam_id).first.title, Exam.where(id: @done.exam_id).first %>
+</p>
+
+<p>
+  <strong>Nota:</strong>
+  <%= @done.nota %>
+</p>
+
+<p>
   <strong>Respostas:</strong>
   <%= @done.respostas %>
 </p>
 
-<%= link_to 'Edit', edit_done_path(@done) %> |
 <%= link_to 'Back', dones_path %>

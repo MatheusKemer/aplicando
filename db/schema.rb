@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331223356) do
+ActiveRecord::Schema.define(version: 20170415011001) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "resposta"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170331223356) do
     t.datetime "finished_at", null: false
     t.integer  "student_id",  null: false
     t.integer  "exam_id",     null: false
+    t.float    "nota"
     t.index ["exam_id"], name: "index_dones_on_exam_id"
     t.index ["student_id"], name: "index_dones_on_student_id"
   end

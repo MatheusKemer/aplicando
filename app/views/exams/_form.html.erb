@@ -9,10 +9,13 @@
     <%= f.input :turma_id %>
   </div>
 
+  <%=f.simple_fields_for :question do |a|%>
+    <%=f.input :questions %>
+  <%end%>
   <div class="form-inputs">
   <%i=0%>
   	<%Question.all.each do |q|%> 
-      <input type="checkbox" name="<%=i%>" value="true" %> <%=q.pergunta%> 
+      <input type="checkbox" name="<%=q.id%>" value="true" %> <%=q.pergunta%> 
       <%i+=1%>
     <%end%>
   </div> 

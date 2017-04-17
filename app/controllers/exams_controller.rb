@@ -5,7 +5,6 @@ class ExamsController < ApplicationController
   # GET /exams.json
   def index
     @exams = Exam.all
-    binding.pry
   end
 
   # GET /exams/1

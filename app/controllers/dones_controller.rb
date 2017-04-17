@@ -4,7 +4,7 @@ class DonesController < ApplicationController
   # GET /dones
   # GET /dones.json
   def index
-    @dones = Done.where(student_id == current_user.id)
+    @dones = Done.where(student_id: current_user.id)
   end
 
   # GET /dones/1
@@ -32,16 +32,8 @@ class DonesController < ApplicationController
     for i in 0..total-1 do #Fazendo um loop para percorrer cada questão
       array[i] = params["#{i}"]  #Jogando dentro do array os ID's das respostas do aluno, respeitando a posição de cada questão
     end 
-    binding.pry
     @done = Done.new(exam_id: exam.id, student_id: current_user.id, respostas: array, finished_at: Time.current) #Criando tabela respostas
     #@done.save! if Done.where(exam_id: exam.id, student_id: current_user.id).blank? #Verificando se já não há respostas do aluno para essa prova
-    if @done.save 
-      flash[:notice] = "Finalizada"
-      redirect_to @done
-    else
-      flash[:notice] = @done.errors.full_messages
-      redirect_to @done
-    end
     #nota = calcular_nota
     certas = [] #criando o array onde será inserido os ID's das questões corretas
     i = 0 # Definindo um contador
@@ -52,7 +44,14 @@ class DonesController < ApplicationController
     each_question_value = 10/total
     nota = certas.size*each_question_value
     #10 divididos pelo número_questões para saber quanto vale cada questão
-    binding.pry
+    @done.nota = nota
+    if @done.save 
+      flash[:notice] = "Finalizada"
+      redirect_to @done
+    else
+      flash[:notice] = @done.errors.full_messages
+      redirect_to @done
+    end
   end
 
   def calcular_nota

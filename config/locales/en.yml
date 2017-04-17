@@ -30,6 +30,9 @@ en:
     class: "Class"
     students: "Students"
     done: "Vocẽ já fez essa prova"
+    not_logged: "You are not logged in"
+    error:
+      unavailable: "Unavailable for you"
   user:
     logged_as: "Logged as"
     logout: "Logout"
