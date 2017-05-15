@@ -1,0 +1,7 @@
+<h2> <%=@exam.title%></h2>
+<% @exam.questions.each do |question| %>
+	<%= render "/questions/teacher_question", question: question%>
+<% end %>
+
+<%= link_to 'Edit', edit_exam_path(exam) %> |
+<%= link_to 'Back', exams_path %>

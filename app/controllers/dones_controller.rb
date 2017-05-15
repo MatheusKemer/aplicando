@@ -1,8 +1,8 @@
 class DonesController < ApplicationController
   before_action :set_done, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user
 
-  # GET /dones
-  # GET /dones.json
+  # GET /dones GET /dones.json
   def index
     @dones = Done.where(student_id: current_user.id)
   end
@@ -25,27 +25,27 @@ class DonesController < ApplicationController
 
   def criar
     return unless user_signed_in?
-    
+
     array = []  #Definindo um array vazio para jogar as respostas do aluno
     exam = Exam.find(params["prova_id"])
     total = exam.questions.count #Puxando o total de questões da prova a partir da prova_id nos params
     for i in 0..total-1 do #Fazendo um loop para percorrer cada questão
       array[i] = params["#{i}"]  #Jogando dentro do array os ID's das respostas do aluno, respeitando a posição de cada questão
-    end 
-    @done = Done.new(exam_id: exam.id, student_id: current_user.id, respostas: array, finished_at: Time.current) #Criando tabela respostas
+    end
+    @done = Done.new(exam_id: exam.id, student_id: current_user.id, respostas: array) #Criando tabela respostas
     #@done.save! if Done.where(exam_id: exam.id, student_id: current_user.id).blank? #Verificando se já não há respostas do aluno para essa prova
     #nota = calcular_nota
     certas = [] #criando o array onde será inserido os ID's das questões corretas
     i = 0 # Definindo um contador
-    exam.questions.each do |q| 
+    exam.questions.each do |q|
       certas << q.id if q.correct == array[i].to_i #Comparando se o ID da resposta correta da questão é o mesmo que o ID que o aluno escolheu
-      i += 1 
+      i += 1
     end
     each_question_value = 10/total
     nota = certas.size*each_question_value
     #10 divididos pelo número_questões para saber quanto vale cada questão
     @done.nota = nota
-    if @done.save 
+    if @done.save
       flash[:notice] = "Finalizada"
       redirect_to @done
     else
@@ -55,7 +55,7 @@ class DonesController < ApplicationController
   end
 
   def calcular_nota
-    
+
   end
 
   # POST /dones
@@ -94,6 +94,7 @@ class DonesController < ApplicationController
   # DELETE /dones/1
   # DELETE /dones/1.json
   def destroy
+    return
     @done.destroy
     respond_to do |format|
       format.html { redirect_to dones_url, notice: 'Done was successfully destroyed.' }

@@ -1,0 +1,14 @@
+<style type="text/css">
+  .my_class .input {background-color: black}
+</style>
+
+Total: <%= question.likes %>
+<br />
+<%= question.likers%>
+<%= button_to "Like", like_path, params: {question: question} %>
+
+
+Total: <%= question.dislikes %>
+<br />
+<%= question.dislikers%>
+<%= button_to "Dislike", dislike_path, params: {question: question} %>

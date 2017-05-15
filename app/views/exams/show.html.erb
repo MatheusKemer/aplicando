@@ -1,15 +1,18 @@
 <% if user_signed_in? %>
-<% binding.pry %>
-  <% if @exam.students.map{|s| s.name}.include? Student.find(current_user.id).name %>
-		<%a = Done.where student_id: current_user.id, exam_id: @exam.id%>
-		<%if a.empty?%> 
-		 <%= render 'to_do', exam: @exam%>
+  <% unless current_user.admin? %>
+	  <% if @exam.students.map{|s| s.name}.include? Student.where(id: current_user.id).first.name%>
+			<%a = Done.where student_id: current_user.id, exam_id: @exam.id%>
+			<%if a.empty?%>
+			 <%= render 'to_do', exam: @exam%>
+			<% else %>
+			  <%= render 'done', exam: @exam%>
+			<% end %>
 		<% else %>
-		  <%= render 'done', exam: @exam%>
+			<br />
+			<%= I18n.t("exam.error.unavailable")%>
 		<% end %>
 	<% else %>
-		<br />
-		<%= I18n.t("exam.error.unavailable")%>
+		<%= render 'show', exam: @exam%>
 	<% end %>
 <%else%>
   <h3> <%=I18n.t("exam.not_logged")%> </h3>

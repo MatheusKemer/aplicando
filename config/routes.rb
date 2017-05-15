@@ -15,30 +15,29 @@ Rails.application.routes.draw do
 end
   resources :exams
   resources :students
-  get "/" => "exams#index"	
+  get "/" => "questions#index"
 
   get "/student_dones/:student_id/:done_id" => "dones#show"
 
-  resources :provas
-  get "/provas/:id" => "provas#show"
+  get "/exam/all" => "exams#all"
 
   post "/dones/teste" => "dones#criar"
 
-	get "/about_us" => "home#about" 
+	get "/about_us" => "home#about"
   get "/students" => "students#index"
 	get "/faq" => "home#faq"
 
 	get "/help" => "help#index"
 
-	get "/questions"          => "questions#index"
-	post "/questions/new"         => "questions#create"  
-	get "/questions/:id"      => "questions#show"
-	get "/questions/:id/edit" => "questions#edit"
-	match "/questions/:id"    => "questions#update", via: [:put,:patch]
-	delete "/questions/:id"   => "questions#destroy"
-	 
-	#resources :questions, only: [:index, :create, :show] do  
-	#    member do 
+  resources :questions
+  get '/discover' => "questions#discover"
+
+  post '/like' => "questions#like"
+
+  post '/dislike' => "questions#dislike"
+
+	#resources :questions, only: [:index, :create, :show] do
+	#    member do
   # 	      post :vote_up
   #	      post :vote_down
   #  	    end

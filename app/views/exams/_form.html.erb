@@ -1,24 +1,34 @@
 <%= simple_form_for(@exam) do |f| %>
   <%= f.error_notification %>
+    <%= @exam.errors.full_messages %>
 
   <div class="form-inputs">
     <%= f.input :title %>
   </div>
-  
+
   <div class="form-inputs">
     <%= f.input :turma_id %>
   </div>
 
-  <%=f.simple_fields_for :question do |a|%>
-    <%=f.input :questions %>
-  <%end%>
   <div class="form-inputs">
-  <%i=0%>
-  	<%Question.all.each do |q|%> 
-      <input type="checkbox" name="<%=q.id%>" value="true" %> <%=q.pergunta%> 
-      <%i+=1%>
-    <%end%>
-  </div> 
+  <%binding.pry%>
+  <% if @question && !@question.valid?%>
+    <% @exam.questions.each do |q|%>
+      <td> <%= f.check_box :questions, id: q.id, class: "form-control", name: "exam[questions][]" %> <%= q.pergunta %> </td>
+      <br />
+    <% end %>
+  <% else %>
+    <% @exam.question.each do |q| %>
+      <td> <%= f.check_box :questions, id: q.id, class: "form-control", name: "exam[questions][]" %> <%= q.pergunta %> </td>
+    <% end %>
+  <% end %>
+
+  <!--<%Question.all.each do |q|%>
+    <input type="checkbox" name="<%=q.id%>" value="true" <%='checked' if @exam.questions.include? q %> %> <%=q.pergunta%>
+    <hr style= "width: 10%; margin: 5px 0;">
+    <%#i+=1%>
+  <%end%> -->
+  </div>
 
     <%= f.submit %>
 <% end %>

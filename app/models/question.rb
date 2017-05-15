@@ -1,32 +1,62 @@
 class Question < ActiveRecord::Base
-	has_many :answers
-	has_and_belongs_to_many :exams    
-	belongs_to :professor
+  serialize :answers, Array
+	has_and_belongs_to_many :exams
+	belongs_to :teacher
 
-	validates :pergunta, presence: {message: "não pode ficar em branco"}, 
+	validates :pergunta, presence: {message: "não pode ficar em branco"},
 uniqueness: true
-	
-	validates :correct, presence: {message: " - é preciso ter uma resposta"}
 
-  default_scope {order("pergunta ASC")}
-  
-  scope :recent, lambda {|x| order("created_at DESC").limit(x) }
-  scope :recent_ten, -> { order("created_at DESC").limit(10) }
-  
-  def self.recent_ten
-    order("created_at DESC").limit(10)
-  end
-  
-  def self.recent(x)
-    order("created_at DESC").limit(x)
+
+  before_save :capitalize_pergunta
+  validate :check_correct
+  validate :count_answers
+  before_destroy :delete_likes_dislikes
+
+  def likers
+    Like.where(question_id: id).map {|t| t.teacher.name}
   end
 
-  before_save :capitalize_pergunta      
+  def dislikers
+    Dislike.where(question_id: id).map {|t| t.teacher.name}
+  end
 
+  def answers_empty?
+    val = self.answers.map {|a| false if a.empty?}
+    if val.empty?
+      true
+    else
+      val.include? false
+    end
+  end
 
   private
-  
-  def capitalize_pergunta                
+
+  def delete_likes_dislikes
+    @question = self
+    Like.where(question_id: @question.id).destroy_all
+    Dislike.where(question_id: @questoin_id).destroy_all
+  end
+
+  def count_answers
+    val = self.answers.map {|a| false if a.empty?}
+    if val.include? false
+      errors.add(:base, "É preciso ter 5 respostas")
+    end
+
+  end
+
+  def capitalize_pergunta
     self.pergunta.capitalize!
   end
+
+  def check_correct
+    @question = self
+    if @question.answers.map{|a| a}.include? @question.correct
+      return
+    else
+      errors.add(:base, I18n.t("error.teste"))
+      return
+    end
+  end
+
 end

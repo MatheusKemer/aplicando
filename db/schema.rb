@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415011001) do
+ActiveRecord::Schema.define(version: 20170425144323) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "resposta"
@@ -19,11 +19,20 @@ ActiveRecord::Schema.define(version: 20170415011001) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "dislikes", force: :cascade do |t|
+    t.integer  "question_id", null: false
+    t.integer  "teacher_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_dislikes_on_question_id"
+    t.index ["teacher_id"], name: "index_dislikes_on_teacher_id"
+  end
+
   create_table "dones", force: :cascade do |t|
-    t.text     "respostas"
-    t.datetime "finished_at", null: false
     t.integer  "student_id",  null: false
     t.integer  "exam_id",     null: false
+    t.text     "respostas"
+    t.datetime "finished_at", null: false
     t.float    "nota"
     t.index ["exam_id"], name: "index_dones_on_exam_id"
     t.index ["student_id"], name: "index_dones_on_student_id"
@@ -32,10 +41,10 @@ ActiveRecord::Schema.define(version: 20170415011001) do
   create_table "exams", force: :cascade do |t|
     t.string   "title"
     t.integer  "turma_id"
-    t.integer  "professor_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["professor_id"], name: "index_exams_on_professor_id"
+    t.integer  "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_exams_on_teacher_id"
     t.index ["turma_id"], name: "index_exams_on_turma_id"
   end
 
@@ -49,20 +58,26 @@ ActiveRecord::Schema.define(version: 20170415011001) do
     t.integer "exam_id",    null: false
   end
 
-  create_table "professors", force: :cascade do |t|
-    t.text     "nome"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "likes", force: :cascade do |t|
+    t.integer  "question_id", null: false
+    t.integer  "teacher_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_likes_on_question_id"
+    t.index ["teacher_id"], name: "index_likes_on_teacher_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "pergunta"
-    t.integer  "correct"
-    t.boolean  "visible"
-    t.integer  "professor_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["professor_id"], name: "index_questions_on_professor_id"
+    t.string   "correct"
+    t.string   "answers"
+    t.boolean  "visible",    default: true
+    t.integer  "teacher_id"
+    t.integer  "likes"
+    t.integer  "dislikes"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["teacher_id"], name: "index_questions_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -73,12 +88,18 @@ ActiveRecord::Schema.define(version: 20170415011001) do
     t.index ["turma_id"], name: "index_students_on_turma_id"
   end
 
+  create_table "teachers", force: :cascade do |t|
+    t.text     "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "turmas", force: :cascade do |t|
     t.integer  "ano"
-    t.integer  "professor_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["professor_id"], name: "index_turmas_on_professor_id"
+    t.integer  "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_turmas_on_teacher_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,7 +116,7 @@ ActiveRecord::Schema.define(version: 20170415011001) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "admin"
+    t.string   "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

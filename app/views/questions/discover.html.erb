@@ -1,0 +1,5 @@
+<% @question.where('teacher_id IS NOT ?', current_user.id).each do |question|%>
+	<h1> Prof. <%= question.teacher.name%> </h1>
+	<%= render "questions/teacher_question" , question: question%>
+	<%= render "questions/like_dislike", question: question %>
+<% end %>

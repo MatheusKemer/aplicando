@@ -1,14 +1,44 @@
+<br />
 <%= form_for @question do |f| %>
-  
-  <div class="form-field">
-    <%= f.label :title, "TitLe" %>
-    <%= f.text_field :title, class: "form-control" %>
-  </div>
 
   <div class="form-field">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.label :pergunta, "Título da questão" %>
+    <%= f.text_field :pergunta, class: "form-control" %>
   </div>
+
+  <br />
+
+  <div class="form-inputs">
+		<table>
+			<thead>
+				<tr>
+					<th>Correta</th>
+					<th>Alternativa</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% if @question.answers_empty? || !@question.valid?%>
+					<%# @question.answers.each_with_index do |answer, i| %>
+				    <% @alternatives = []%>
+				    <%for i in 0..4 do%>
+				    <tr>
+					    <td> <%= f.radio_button :correct, i %> </td>
+					    <!-- <td> <input type="radio" name="correct" value="<%=i%>" %> </td> -->
+					    <!-- <td> <input type="text" name="answers[]" value="<%=@question.answers[i].present? ? @question.answers[i] : nil%>"> </td> -->
+					   	<td> <%= f.text_field :answers, value:@question.answers[i] , class: "form-control", name: "question[answers][]" %> </td>
+				  	</tr>
+				  <% end %>
+			  <% else %>
+				  <%for i in 0..4 do%>
+				  	<tr>
+					    <td> <input type="radio" name="correct" value="<%=i%>"> </td>
+					    <td> <input type="text" name="<%=i%>"> </td>
+				  	</tr>
+				  <% end %>
+				<% end %>
+			</tbody>
+	 	</table>
+	 </div>
 
   <%= f.submit %>
 

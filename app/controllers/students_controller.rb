@@ -4,8 +4,8 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
-    # 
+    @exams = Exam.all
+    @nome = current_user.name
   end
 
   # GET /students/1

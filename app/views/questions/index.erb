@@ -1,10 +1,16 @@
-<h1>Listing All Questions</h1>
+<% if current_user.type == "Teacher" %>
+	<h1>Listing All Your Questions</h1>
 
-<%= link_to "Create New Question", new_question_path %>
+	<%= link_to "Create New Question", new_question_path %>
 
-<% @questions.each do |question| %>
-    <h2><%= question.title %></h2>
-    <p><%= question.description %></p>
-    <p>Created On: <%= question.created_at.strftime("%Y-%b-%d")%></p>
-    <hr>
+	<% @question.where(teacher_id: current_user.id).each do |question| %>
+	    <%= render "questions/teacher_question", question: question %>
+	    <%binding.pry%>
+	    <p>Data de criação: <%= question.created_at.strftime("%d-%m-%Y")%></p>
+	    <td><%= link_to 'Show', question %></td>
+	    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+	    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
+<% else %>
+	ALUNO
 <% end %>

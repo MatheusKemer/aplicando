@@ -1,0 +1,51 @@
+  <head>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  </head>
+
+  <p id="notice"><%= notice %></p>
+
+  <h1>Your Exams</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%=I18n.t("exam.title")%></th>
+        <th><%=I18n.t("exam.class")%></th>
+        <th><%=I18n.t("exam.students")%></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <%# student_exams = @exams.each {|e| e if e.students.include? Student.find(current_user.id)}%>
+    <% teacher_exams = []%>
+    <% @exams.each do |exam|%>
+      <% if exam.teacher == Teacher.where(id: current_user.id).first%>
+        <% teacher_exams << exam%>
+      <% end %>
+    <% end %>
+    <% teacher_exams.each do |exam| %>
+      <tr>
+        <td><%= exam.title %></td>
+      	<td><%= exam.turma_id %></td>
+        <td>
+          <a>
+            <%# exam.students.each do |student|%>
+            <% Done.where(exam_id: exam.id).each do |done|%>
+              <%=link_to done.student.name %>
+              <%#   %>
+            <% end %>
+          </a>
+        </td>
+        <td><%= link_to 'Show', exam %></td>
+        <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
+        <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%><i class="fa fa-check-square-o" aria-hidden="true"></i>
+  <%end%></td>
+    	</tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Exam', new_exam_path %>
