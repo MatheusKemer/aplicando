@@ -40,7 +40,7 @@
     <div class="container">
       <div class="teste">
       <nav class="nav-main">
-        <%= link_to "#{I18n.t("nav.class")}" %>
+        <%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %>
         <%= link_to "#{I18n.t("nav.discover")}", discover_path %>
         <%= link_to "#{I18n.t("nav.questions")}", questions_path %>
         <%= link_to "#{I18n.t("nav.exam")}", exams_path %>
@@ -59,13 +59,24 @@
     <% if (la != "sign_in" && la != "sign_up") %>
     <%   %>
       <nav class="log">
-        <%= link_to("#{I18n.t("user.login")}", new_user_session_path)  %>
+        <%= link_to("#{I18n.t("user.login")}", )  %>
       </nav>
     <% end %>
   <%end%>
-  <% if flash[:notice] || flash[:error] %>
-    <h3><%= flash[:notice] || flash[:error] %></h3>
+
+
+  <% if flash[:notice]  %>
+    <h3 style="color: green;"><%= flash[:notice] %></h3>
   <% end %>
+
+  <% if flash[:error]%>
+    <h3 style="color: red;"><%= flash[:error] %></h3>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <h3 style="color: orange;"> <%= flash[:alert] %> </h3>
+  <% end %>
+
 
   <%= yield %>
 

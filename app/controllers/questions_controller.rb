@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :find_question, only: [:show, :edit, :destroy, :update]
+  before_action :set_question, only: [:show, :edit, :destroy, :update]
 
   def index
     redirect_to students_path if current_user.type == "Student"
@@ -30,8 +30,14 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_attributes)
+    attributes = question_attributes
+    get_class_and_discipline attributes.delete(:discipline)
+    @question = Question.new(attributes)
+    #@question.school_class = @school_class
+    binding.pry
+    @question.discipline = @discipline
     @question.teacher_id = current_user.id
+    @question.created_at = Time.current
     if @question.correct.present?
       @question.correct = @question.answers[@question.correct.to_i]
     end
@@ -41,6 +47,20 @@ class QuestionsController < ApplicationController
     else
       flash[:error] = @question.errors.full_messages
       render :new
+    end
+  end
+
+  def update
+    #@question = Question.find(question_url.split('/').last.to_i)
+    @question.update(question_attributes)
+    if @question.correct.present?
+      @question.correct = @question.answers[@question.correct.to_i]
+    end
+    if @question.save!
+      redirect_to questions_path(@question)
+    else
+      flash[:error] = @question.errors.full_messages
+      render :edit
     end
   end
 
@@ -61,24 +81,27 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    binding.pry
     if Question.find(params[:id]).delete
-      render text: "Questão: #{params[:id]} foi excluída com sucesso"
+      render text: "Question: #{params[:id]} was successfully excluded"
     else
-      render text: "Não foi possível excluir a questão"
+      render text: "There was a problem excluding your question"
     end
   end
 
 
   private
 
+  def get_class_and_discipline(param)
+    param = param.split '-'
+    @discipline = Discipline.find_by name: param.last
+    @school_class = param.first
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
+  end
+
   def question_attributes
-    #@answers = []
-    #params.each do |key, value|
-    #  if ["0", "1", "2", "3", "4"].include? key
-    #    @answers << value
-    #  end
-    #end
-    question_attributes = params.require(:question).permit(:pergunta, :correct, :answers => [])
+    params.require(:question).permit(:discipline, :pergunta, :correct, :answers => [])
   end
 end

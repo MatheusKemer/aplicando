@@ -1,6 +1,9 @@
 <br />
 <%= form_for @question do |f| %>
 
+  <%= f.label :discipline , "Disciplina" %>
+  <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ) %>
+
   <div class="form-field">
     <%= f.label :pergunta, "Título da questão" %>
     <%= f.text_field :pergunta, class: "form-control" %>
@@ -17,12 +20,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% if @question.answers_empty? || !@question.valid?%>
+			<%#binding.pry%>
+				<% if @question.answers_empty? || !@question.valid? || params[:action] == "edit"%>
 					<%# @question.answers.each_with_index do |answer, i| %>
-				    <% @alternatives = []%>
 				    <%for i in 0..4 do%>
 				    <tr>
-					    <td> <%= f.radio_button :correct, i %> </td>
+					    <td> <%= f.radio_button :correct, i, :checked => (@question.answers.index(@question.correct)==i) %> </td>
 					    <!-- <td> <input type="radio" name="correct" value="<%=i%>" %> </td> -->
 					    <!-- <td> <input type="text" name="answers[]" value="<%=@question.answers[i].present? ? @question.answers[i] : nil%>"> </td> -->
 					   	<td> <%= f.text_field :answers, value:@question.answers[i] , class: "form-control", name: "question[answers][]" %> </td>

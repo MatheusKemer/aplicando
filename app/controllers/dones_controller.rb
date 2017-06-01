@@ -4,28 +4,27 @@ class DonesController < ApplicationController
 
   # GET /dones GET /dones.json
   def index
-    @dones = Done.where(student_id: current_user.id)
+    redirect_to exams_path
   end
 
   # GET /dones/1
   # GET /dones/1.json
   def show
-    return
+    redirect_to exams_path
   end
 
   # GET /dones/new
   def new
-    return
+    redirect_to exams_path
   end
 
   # GET /dones/1/edit
   def edit
-    return
+    redirect_to exams_path
   end
 
   def criar
     return unless user_signed_in?
-
     array = []  #Definindo um array vazio para jogar as respostas do aluno
     exam = Exam.find(params["prova_id"])
     total = exam.questions.count #Puxando o total de questões da prova a partir da prova_id nos params
@@ -33,12 +32,13 @@ class DonesController < ApplicationController
       array[i] = params["#{i}"]  #Jogando dentro do array os ID's das respostas do aluno, respeitando a posição de cada questão
     end
     @done = Done.new(exam_id: exam.id, student_id: current_user.id, respostas: array) #Criando tabela respostas
+    @done.finished_at = Time.current
     #@done.save! if Done.where(exam_id: exam.id, student_id: current_user.id).blank? #Verificando se já não há respostas do aluno para essa prova
     #nota = calcular_nota
     certas = [] #criando o array onde será inserido os ID's das questões corretas
     i = 0 # Definindo um contador
     exam.questions.each do |q|
-      certas << q.id if q.correct == array[i].to_i #Comparando se o ID da resposta correta da questão é o mesmo que o ID que o aluno escolheu
+      certas << q.id if q.correct == q.answers[array[i].to_i] #Comparando se o ID da resposta correta da questão é o mesmo que o ID que o aluno escolheu
       i += 1
     end
     each_question_value = 10/total
@@ -52,10 +52,6 @@ class DonesController < ApplicationController
       flash[:notice] = @done.errors.full_messages
       redirect_to @done
     end
-  end
-
-  def calcular_nota
-
   end
 
   # POST /dones

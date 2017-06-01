@@ -3,16 +3,15 @@
       <strong>Title:</strong>
       <%= @exam.title %>
     </p>
-      <% array = @exam.questions.map {|q| q.id}%>
-      <%= array%>
       <br />
       <%= form_tag("/dones/teste", :method => "post") do %>
         <% for i in 0..@exam.questions.count-1 do %>
           <%= @exam.questions[i].pergunta %>
           <br />
-          <% @exam.questions[i].answers.each do |answer|%>
-           <span> <input type="radio" name="<%=i%>" value="<%=answer.id%>" %>
-              <%=answer.resposta%> </span>
+          <% @exam.questions[i].answers.each_with_index do |answer, index|%>
+          <%binding.pry%>
+           <span> <input type="radio" name="<%=i%>" value="<%=index%>" %>
+              <%=answer%> </span>
           <br />
           <% end %>
           <br />

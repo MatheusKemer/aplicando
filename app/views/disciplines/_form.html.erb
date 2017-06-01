@@ -1,0 +1,14 @@
+<%= simple_form_for(@discipline) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+  </div>
+
+  <%= f.input :school_class do %>
+   <%= f.select :school_class, SchoolClass.all.map{ |l| l.ano } %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

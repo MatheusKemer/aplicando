@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :disciplines
   devise_for :users, controllers: {sessions: 'users/sessions'}
+
+  get 'sing_up' => 'users#create'
   resources :dones
 
-  get 'login' => 'sessions#new', as: :login
+  get 'login' => 'sessions#new'#, as: :login
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
   resources :users, only: [:new, :create] do

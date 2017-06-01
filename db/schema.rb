@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425144323) do
+ActiveRecord::Schema.define(version: 20170527232205) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "resposta"
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "disciplines", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "teacher_id"
+    t.integer  "school_class_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["school_class_id"], name: "index_disciplines_on_school_class_id"
+    t.index ["teacher_id"], name: "index_disciplines_on_teacher_id"
   end
 
   create_table "dislikes", force: :cascade do |t|
@@ -40,22 +50,17 @@ ActiveRecord::Schema.define(version: 20170425144323) do
 
   create_table "exams", force: :cascade do |t|
     t.string   "title"
-    t.integer  "turma_id"
+    t.integer  "discipline_id"
     t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["discipline_id"], name: "index_exams_on_discipline_id"
     t.index ["teacher_id"], name: "index_exams_on_teacher_id"
-    t.index ["turma_id"], name: "index_exams_on_turma_id"
   end
 
   create_table "exams_questions", id: false, force: :cascade do |t|
     t.integer "exam_id",     null: false
     t.integer "question_id", null: false
-  end
-
-  create_table "exams_students", id: false, force: :cascade do |t|
-    t.integer "student_id", null: false
-    t.integer "exam_id",    null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -71,35 +76,33 @@ ActiveRecord::Schema.define(version: 20170425144323) do
     t.string   "pergunta"
     t.string   "correct"
     t.string   "answers"
-    t.boolean  "visible",    default: true
+    t.boolean  "visible",       default: true
     t.integer  "teacher_id"
+    t.integer  "discipline_id"
     t.integer  "likes"
     t.integer  "dislikes"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["discipline_id"], name: "index_questions_on_discipline_id"
     t.index ["teacher_id"], name: "index_questions_on_teacher_id"
+  end
+
+  create_table "school_classes", force: :cascade do |t|
+    t.integer  "ano"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
     t.text     "name"
-    t.integer  "turma_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["turma_id"], name: "index_students_on_turma_id"
   end
 
   create_table "teachers", force: :cascade do |t|
     t.text     "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "turmas", force: :cascade do |t|
-    t.integer  "ano"
-    t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["teacher_id"], name: "index_turmas_on_teacher_id"
   end
 
   create_table "users", force: :cascade do |t|

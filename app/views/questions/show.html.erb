@@ -1,6 +1,7 @@
-<h1><%= @question.pergunta %></h1>
-<p><%= @question.created_at.strftime("%Y-%b-%d") %>
-
+<%= render "teacher_question", question: @question%>
+<p><%= l @question.created_at %>
+<p><%= @question.discipline.name %>
+<br>
 <br>
 
 <%= link_to "Edit", edit_question_path(@question) %>
@@ -8,3 +9,7 @@
 <br>
 
 <%= link_to "All Questions", questions_path %>
+
+<br>
+
+<%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>

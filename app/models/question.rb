@@ -2,10 +2,10 @@ class Question < ActiveRecord::Base
   serialize :answers, Array
 	has_and_belongs_to_many :exams
 	belongs_to :teacher
+  belongs_to :discipline
 
 	validates :pergunta, presence: {message: "não pode ficar em branco"},
 uniqueness: true
-
 
   before_save :capitalize_pergunta
   validate :check_correct

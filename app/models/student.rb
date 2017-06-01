@@ -1,13 +1,14 @@
 class Student < User
-	has_and_belongs_to_many :exams
-	belongs_to :turma, optional: true
+	#has_many :exams, :through => :exams_users
+	belongs_to :discipline
 	has_many :dones
 	before_save :check_student
 
 	validates :name, presence: {message: "não pode ficar em branco"}
-	#validates :turma_id, presence: {message: "é preciso ter uma turma"}
-	private
-	def check_student
+	#validates :class_id, presence: {message: "é preciso ter uma class"}
 
+  private
+
+  def check_student
 	end
 end

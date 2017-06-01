@@ -25,15 +25,18 @@ en:
     faq: "FAQ"
     about: "About us"
     exam: "Exams"
+    disciplines: "Disciplines"
     questions: "Questions"
-    class: "Turma"
-    discover: "Descubra"
+    class: "Class"
+    discover: "Discover"
   question:
     error:
 
   exam:
     title: "Title"
     class: "Class"
+    discipline: "Discipline"
+    nota: "Nota"
     students: "Students"
     done: "Vocẽ já fez essa prova"
     not_logged: "You are not logged in"
@@ -51,4 +54,4 @@ en:
     cannot_dislike_own_question: "Can't dislike your own question, your idiot"
     already_liked_it: "Question already liked"
     already_disliked_it: "Question already disliked"
-    teste: "È necessário uma resposta correcta"
+    teste: "It's necessary a correct answer"

@@ -10,7 +10,7 @@
     <thead>
       <tr>
         <th><%=I18n.t("exam.title")%></th>
-        <th><%=I18n.t("exam.class")%></th>
+        <th><%=I18n.t("exam.discipline")%></th>
         <th><%=I18n.t("exam.students")%></th>
         <th colspan="3"></th>
       </tr>
@@ -26,14 +26,14 @@
     <% teacher_exams.each do |exam| %>
       <tr>
         <td><%= exam.title %></td>
-      	<td><%= exam.turma_id %></td>
+      	<td><%= exam.discipline.name %></td>
         <td>
           <a>
             <%# exam.students.each do |student|%>
-            <% Done.where(exam_id: exam.id).each do |done|%>
-              <%=link_to done.student.name %>
+            <%# Done.where(exam_id: exam.id).each do |done|%>
+              <%#=link_to done.student.name %>
               <%#   %>
-            <% end %>
+            <%# end %>
           </a>
         </td>
         <td><%= link_to 'Show', exam %></td>

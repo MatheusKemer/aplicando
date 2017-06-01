@@ -1,15 +1,18 @@
-
 <h4> <%=I18n.t("exam.done")%></h4>
+<h3> Nota: <%=@done.nota%></h3>
 
-<%respostas = Done.where(exam_id: @exam.id, student_id: current_user.id).first.respostas%>
-<%i=0%>
+<%respostas = @done.respostas%>
 <ol>
-<%@exam.questions.each do |q|%>
+<%@exam.questions.each_with_index do |q, i|%>
   <li><%= q.pergunta %>
     <br />
-    <%=q.answers.where(id: respostas[i]).first.resposta%>
-    <%i+=1%>
+    <% q.answers.each do |a|%>
+    <%#binding.pry%>
+      <%=q.answers[respostas[i].to_i]==a ? "**#{a}**" : a%>
+    <% end %>
   <br />
   <br />
 <% end %>
 </ol>
+
+<%= link_to "Back", exams_path%>

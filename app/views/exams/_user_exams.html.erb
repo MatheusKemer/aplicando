@@ -27,7 +27,7 @@
     <% student_exams.each do |exam| %>
       <tr>
         <td><%= exam.title %></td>
-      	<td><%= exam.turma_id %></td>
+      	<td><%= exam.class_id %></td>
         <td><%= link_to 'Show', exam %></td>
         <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%><i class="fa fa-check-square-o" aria-hidden="true"></i>
   <%end%></td>

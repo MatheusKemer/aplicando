@@ -1,5 +1,6 @@
 class ExamsController < ApplicationController
   before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  before_action :check_permission, only:  [:new, :create, :edit, :update, :destroy]
 
   # GET /exams
   # GET /exams.json
@@ -15,11 +16,12 @@ class ExamsController < ApplicationController
   # GET /exams/new
   def new
     @exam = Exam.new
-    @questions = Question.where(teacher_id: current_user.id, visible: true)
+    @questions = Teacher.find(current_user.id).questions
   end
 
   # GET /exams/1/edit
   def edit
+    @questions = Teacher.find(current_user.id).questions
   end
 
   def all
@@ -28,16 +30,21 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
-    @exam = Exam.new(exam_params)
-    binding.pry
+    params = exam_params
+    @discipline = params.delete(:discipline)
+    @exam = Exam.new(params)
     @questions_id.each {|id| @exam.questions << Question.find(id)}
     @exam.teacher_id = current_user.id
+    @exam.discipline = Discipline.find_by name: @discipline
+    @questions = Teacher.find(current_user.id).questions
+    @exam.created_at = Time.current
+            binding.pry
     respond_to do |format|
       if @exam.save
         format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
-        format.html { render :new}
+        format.html { render :new }
         format.json { render json: @exam.errors, status: :unprocessable_entity }
       end
     end
@@ -46,7 +53,6 @@ class ExamsController < ApplicationController
   # PATCH/PUT /exams/1
   # PATCH/PUT /exams/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @exam.update(exam_params)
         format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
@@ -71,18 +77,20 @@ class ExamsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_exam
-      @exam = Exam.find(params[:id])
+      @exam = Exam.find_by_id(params[:id])
+      redirect_to exams_path if @exam.nil?
+    end
+
+    def check_permission
+      redirect_to exams_path, flash: {alert: "Não permitido"} if current_user.student?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
       @questions_id = []
-      params.each do |key, value|
-        if value == "true"
-          @questions_id << key.to_i
-        end
+      Question.where(teacher_id: current_user.id).each do |q|
+        @questions_id << q.id if params["#{q.id}"] == "true"
       end
-      params
-      params.require(:exam).permit(:title, :turma_id)
+      params.require(:exam).permit(:id, :title, :discipline, :questions => [])
     end
 end

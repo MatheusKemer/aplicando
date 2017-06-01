@@ -12,3 +12,23 @@ Total: <%= question.dislikes %>
 <br />
 <%= question.dislikers%>
 <%= button_to "Dislike", dislike_path, params: {question: question} %>
+
+
+Like AJAX
+
+<%= button_tag "LIKE", :id => "like", :class => "like" %>
+
+<script type="text/javascript">
+  function func(){
+    $.ajax({
+      url: like_path
+      type: "POST"
+      data: 'like'
+    })
+    window.alert("era")
+  }
+
+  $('.like').click(function(){
+    func();
+  });
+</script>

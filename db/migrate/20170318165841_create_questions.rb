@@ -6,6 +6,7 @@ class CreateQuestions < ActiveRecord::Migration[5.0]
         t.string :answers
         t.boolean :visible, default: true
         t.references :teacher
+        t.references :discipline
    			t.integer :likes
    			t.integer :dislikes
         t.timestamps null: false

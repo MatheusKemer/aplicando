@@ -4,11 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def self.teacher?
-    current_user.type == "Teacher"
+  def teacher?
+    self.type == "Teacher"
   end
 
   def student?
-    current_user.type == "Student"
+    self.type == "Student"
   end
 end

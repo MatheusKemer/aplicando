@@ -2,14 +2,16 @@
 	<h1>Listing All Your Questions</h1>
 
 	<%= link_to "Create New Question", new_question_path %>
-
+	<br />
 	<% @question.where(teacher_id: current_user.id).each do |question| %>
-	    <%= render "questions/teacher_question", question: question %>
-	    <%binding.pry%>
-	    <p>Data de criação: <%= question.created_at.strftime("%d-%m-%Y")%></p>
+	<br />
+	    <td> <%= question.pergunta %> - </td>
 	    <td><%= link_to 'Show', question %></td>
 	    <td><%= link_to 'Edit', edit_question_path(question) %></td>
 	    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<br>
+			 ____________________________________________________
+			<br>
 	<% end %>
 <% else %>
 	ALUNO
