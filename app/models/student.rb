@@ -1,6 +1,6 @@
 class Student < User
 	#has_many :exams, :through => :exams_users
-	belongs_to :discipline
+	#belongs_to :discipline
 	has_many :dones
 	before_save :check_student
 

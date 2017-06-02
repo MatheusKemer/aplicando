@@ -1,6 +1,6 @@
 class SchoolClass < ApplicationRecord
 	#has_many :students
-	has_many :disciplines, optional: true
+	has_many :disciplines
 
 	validates :ano, presence: {message: "é necessário"},
 	uniqueness: true

@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
   resources :disciplines
+
   devise_for :users, controllers: {sessions: 'users/sessions'}
 
   get 'sing_up' => 'users#create'
   resources :dones
+
+  get "/disciplies/:id/join" => "disciplines#join", :as => :join_discipline
 
   get 'login' => 'sessions#new'#, as: :login
   post 'login' => 'sessions#create'

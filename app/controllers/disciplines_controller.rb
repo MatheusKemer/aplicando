@@ -1,5 +1,5 @@
 class DisciplinesController < ApplicationController
-  before_action :set_discipline, only: [:show, :edit, :update, :destroy]
+  before_action :set_discipline, only: [:show, :edit, :update, :destroy, :join]
   before_action :check_permission, only:  [:new, :create, :edit, :update, :destroy]
 
   # GET /disciplines
@@ -11,6 +11,21 @@ class DisciplinesController < ApplicationController
   # GET /disciplines/1
   # GET /disciplines/1.json
   def show
+  end
+
+  def join
+    return unless current_user.student?
+    return redirect_to disciplines_path, alert: "Aluno já adicionado" unless @discipline.add_students current_user
+    respond_to do |format|
+      if @discipline.save
+        format.html { redirect_to disciplines_path, notice: "Student joined successfully"}
+        format.json { render :show, status: :created, location: @discipline }
+      else
+        #flash[:alert] = @discipline.errors.full_messages
+        format.html { render :new }
+        format.json { render json: @discipline.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /disciplines/new
@@ -70,7 +85,8 @@ class DisciplinesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_discipline
-      @discipline = Discipline.find(params[:id])
+      @discipline = Discipline.find_by_id(params[:id])
+      redirect_to disciplines_path unless @discipline.present?
     end
 
     def check_permission
