@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
+  <strong> Aluno: <%= @done.student.name if current_user.teacher? %> </strong>
+</p>
+<p>
   <strong>Prova:</strong>
-  <%= link_to Exam.where(id: @done.exam_id).first.title, Exam.where(id: @done.exam_id).first %>
+  <%= link_to @done.exam.title, @done.exam %>
 </p>
 
 <p>
@@ -10,9 +13,9 @@
   <%= @done.nota %>
 </p>
 
-<p>
-  <strong>Respostas:</strong>
-  <%= @done.respostas %>
-</p>
+<% @done.exam.questions.each_with_index do |question, index| %>
+
+  <p> - <%= question.pergunta %>:   <%= question.answers[(@done.respostas[index]).to_i]%></p>
+<% end %>
 
 <%= link_to 'Back', dones_path %>

@@ -41,8 +41,8 @@
       <div class="teste">
       <nav class="nav-main">
         <%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %>
-        <%= link_to "#{I18n.t("nav.discover")}", discover_path %>
-        <%= link_to "#{I18n.t("nav.questions")}", questions_path %>
+        <%if current_user.teacher? %> <%= link_to "#{I18n.t("nav.discover")}", discover_path %> <% end %>
+        <%if current_user.teacher? %> <%= link_to "#{I18n.t("nav.questions")}", questions_path %> <% end %>
         <%= link_to "#{I18n.t("nav.exam")}", exams_path %>
         <%= link_to "#{I18n.t("nav.about")}", about_us_path, class: "btn
   																					 btn-default nav-btn", id: "about" %>

@@ -4,7 +4,7 @@
 
   <p id="notice"><%= notice %></p>
 
-  <h1>Your Exams</h1>
+  <h1><%=I18n.t("exam.your_exams")%></h1>
 
   <table>
     <thead>
@@ -19,29 +19,23 @@
     <%# student_exams = @exams.each {|e| e if e.students.include? Student.find(current_user.id)}%>
     <% teacher_exams = []%>
     <% @exams.each do |exam|%>
-      <% if exam.teacher == Teacher.where(id: current_user.id).first%>
-        <% teacher_exams << exam%>
+      <% if exam.teacher.id == current_user.id %>
+        <tr>
+          <td><%= exam.title %></td>
+        	<td><%= exam.discipline.name %></td>
+          <td>
+            <a>
+              <% Done.where(exam_id: exam.id).each do |done|%>
+                <%=link_to done.student.name, done_path(done.id) %>
+              <% end %>
+            </a>
+          </td>
+          <td><%= link_to 'Show', exam %></td>
+          <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
+          <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%><i class="fa fa-check-square-o" aria-hidden="true"></i></td> <% end %>
+      	</tr>
       <% end %>
-    <% end %>
-    <% teacher_exams.each do |exam| %>
-      <tr>
-        <td><%= exam.title %></td>
-      	<td><%= exam.discipline.name %></td>
-        <td>
-          <a>
-            <%# exam.students.each do |student|%>
-            <%# Done.where(exam_id: exam.id).each do |done|%>
-              <%#=link_to done.student.name %>
-              <%#   %>
-            <%# end %>
-          </a>
-        </td>
-        <td><%= link_to 'Show', exam %></td>
-        <td><%= link_to 'Edit', edit_exam_path(exam) %></td>
-        <td><%= link_to 'Destroy', exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%><i class="fa fa-check-square-o" aria-hidden="true"></i>
-  <%end%></td>
-    	</tr>
     <% end %>
     </tbody>
   </table>

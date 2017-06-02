@@ -29,6 +29,11 @@ en:
     questions: "Questions"
     class: "Class"
     discover: "Discover"
+  menu:
+    show: "Show"
+    back: "Back"
+    destroy: "Destroy"
+
   question:
     error:
 
@@ -40,6 +45,7 @@ en:
     students: "Students"
     done: "Vocẽ já fez essa prova"
     not_logged: "You are not logged in"
+    your_exams: "Your Exams"
     error:
       unavailable: "Unavailable for you"
   user:
@@ -48,6 +54,13 @@ en:
     login: "Login"
   student:
     title: "Student"
+  discipline:
+    your_disciplines: "Your Disciplines"
+    name: "Name"
+    class: "Class"
+    join: "Join"
+    exit: "Exit"
+    new: "New Discipline"
   error:
     exam_already_exists: "Already exists"
     cannot_like_own_question: "Can't like your own question, your idiot"

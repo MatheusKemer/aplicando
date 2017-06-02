@@ -10,7 +10,7 @@ class DonesController < ApplicationController
   # GET /dones/1
   # GET /dones/1.json
   def show
-    redirect_to exams_path
+    redirect_to exams_path unless @done.student.id == current_user.id || current_user.teacher? || current_user.admin?
   end
 
   # GET /dones/new
@@ -57,7 +57,6 @@ class DonesController < ApplicationController
   # POST /dones
   # POST /dones.json
   def create
-    binding.pry
     if Done.where(exam_id: exam.id, student_id: current_user.id).any?
       @done = Done.new(done_params)
 

@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def student?
     self.type == "Student"
   end
+
+  def admin?
+    self.type == "Admin"
+  end
 end

@@ -7,6 +7,10 @@ class Student < User
 	validates :name, presence: {message: "não pode ficar em branco"}
 	#validates :class_id, presence: {message: "é preciso ter uma class"}
 
+  def disciplines
+    Discipline.map {|d| d if d.students.include? current_user}
+  end
+
   private
 
   def check_student

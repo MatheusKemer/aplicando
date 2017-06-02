@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 
   get 'sing_up' => 'users#create'
   resources :dones
+  resources :teachers
 
   get "/disciplies/:id/join" => "disciplines#join", :as => :join_discipline
+  get "/disciplies/:id/exit" => "disciplines#exit", :as => :exit_discipline
 
   get 'login' => 'sessions#new'#, as: :login
   post 'login' => 'sessions#create'

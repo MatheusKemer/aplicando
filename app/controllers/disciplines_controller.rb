@@ -1,5 +1,5 @@
 class DisciplinesController < ApplicationController
-  before_action :set_discipline, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_discipline, only: [:show, :edit, :update, :destroy, :join, :exit]
   before_action :check_permission, only:  [:new, :create, :edit, :update, :destroy]
 
   # GET /disciplines
@@ -24,6 +24,16 @@ class DisciplinesController < ApplicationController
         #flash[:alert] = @discipline.errors.full_messages
         format.html { render :new }
         format.json { render json: @discipline.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def exit
+    return unless current_user.student? || @discipline.students.blank?
+    @discipline.students = @discipline.students - [current_user] if @discipline.students.include? current_user
+    respond_to do |format|
+      if @discipline.save
+        format.html { redirect_to disciplines_path, notice: "Student out successfully"}
       end
     end
   end

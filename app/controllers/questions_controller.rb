@@ -34,7 +34,6 @@ class QuestionsController < ApplicationController
     get_class_and_discipline attributes.delete(:discipline)
     @question = Question.new(attributes)
     #@question.school_class = @school_class
-    binding.pry
     @question.discipline = @discipline
     @question.teacher_id = current_user.id
     @question.created_at = Time.current

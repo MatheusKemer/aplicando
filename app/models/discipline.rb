@@ -18,6 +18,7 @@ class Discipline < ApplicationRecord
   end
 
   def add_students (eae)
+    self.students = [] if self.students.nil?
     if self.students.include? eae
       errors.add(:discipline, "já existe esse aluno")
       false
@@ -26,5 +27,4 @@ class Discipline < ApplicationRecord
       true
     end
   end
-
 end
