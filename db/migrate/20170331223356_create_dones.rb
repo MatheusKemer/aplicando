@@ -6,6 +6,5 @@ class CreateDones < ActiveRecord::Migration[5.0]
       t.text :respostas
       t.datetime :finished_at, :null => false
     end
-    remove_column :dones, :updated_at, :datetime
   end
 end
