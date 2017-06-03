@@ -43,7 +43,7 @@ en:
     discipline: "Discipline"
     nota: "Nota"
     students: "Students"
-    done: "Vocẽ já fez essa prova"
+    done: "Done"
     not_logged: "You are not logged in"
     your_exams: "Your Exams"
     questions: "Questions"
@@ -63,6 +63,8 @@ en:
     join: "Join"
     exit: "Exit"
     new: "New Discipline"
+    error:
+      already_student: "Student %{student} already in discipline"
   error:
     exam_already_exists: "Already exists"
     cannot_like_own_question: "Can't like your own question, your idiot"

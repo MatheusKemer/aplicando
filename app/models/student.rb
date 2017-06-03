@@ -8,7 +8,7 @@ class Student < User
 	#validates :class_id, presence: {message: "é preciso ter uma class"}
 
   def disciplines
-    Discipline.map {|d| d if d.students.include? current_user}
+    Discipline.all.map {|d| d if !d.students.blank? && (d.students.include? Student.first)}.compact
   end
 
   private
