@@ -1,39 +1,47 @@
 <%= simple_form_for(@exam) do |f| %>
-
+<%#=flash[:alert] = I18n.t("exam.questions") + ' ' + @exam.errors[:questions].first if
+                                                     @exam.errors[:questions].present?%>
   <div class="form-inputs">
     <%= f.input :title %>
   </div>
 
- <%= f.label :discipline , "Disciplina" %>
-  <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.name}"]}] }) %>
-
-  <div class="form-inputs">
-
-  <%# if @exam.questions.present? %>
-    <%# @exam.questions.each do |q|%>
-      <td> <%#= f.check_box :questions, id: q.id, class: "form-control", name: "exam[questions][]" %> <%#= q.pergunta %> </td>
-    <%# end %>
-  <%# else %>
-    <%# @questions.each do |q| %>
-      <td> <%#= f.check_box :questions, value: 2 ,class: "form-control", name: "exam[questions][]" %> <%#= q.pergunta %> </td>
-    <%# end %>
-  <%# end %>
-
-  Questions:
-  <% if @questions.present? %>
-    <div class="form-inputs">
-    <% @questions.each do |q|%>
-      <input type="checkbox" name="<%=q.id%>" value="true" <%='checked' if @exam.questions.include? q %>>
-      <%= link_to "#{q.pergunta}", q %>
-      <hr style= "width: 10%; margin: 5px 0;">
-      <%#i+=1%>
-    <%end%>
-    </div>
-  <% else %>
-    <br>
-    You don't have any questions
-  <% end %>
+  <div class="select_discipline">
+   <%= f.label :discipline , I18n.t("exam.discipline") %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.name}"]}] }, @exam.try(:discipline).try(:name)) %>
   </div>
 
-    <%= f.submit %>
+  <div class="form-inputs">
+    <%= f.label :questions , I18n.t("exam.questions") %>
+    <% Discipline.all.each do |discipline|%>
+      <div class="discipline <%= discipline.name %> <% 'active' if @exam.try(:discipline).try(:name) == discipline%>">
+      <% discipline.questions.each do |question|%>
+        <input type="checkbox" name="<%=question.id%>" value="true" <%='checked' if @exam.questions.include? question %>>
+        <%= link_to "#{question.pergunta}", question %>
+        <hr style= "width: 10%; margin: 5px 0;">
+      <% end %>
+      </div>
+    <% end%>
+
+  </div>
+  <br >
+  <%= f.submit %>
 <% end %>
+
+<script>
+  $('.discipline.'+ $('#exam_discipline :selected').val()).css("display", "block")
+
+  $('.select_discipline').on('change', function(){
+    $(".discipline").css("display", "none")
+    var value = $('#exam_discipline :selected').val();
+    $(".discipline."+value).css("display","block");
+  })
+</script>
+
+<style>
+  .discipline {
+    display: none;
+  }
+  .discipline.active{
+    display: block;
+  }
+</style>

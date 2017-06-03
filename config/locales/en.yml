@@ -46,8 +46,10 @@ en:
     done: "Vocẽ já fez essa prova"
     not_logged: "You are not logged in"
     your_exams: "Your Exams"
+    questions: "Questions"
     error:
       unavailable: "Unavailable for you"
+      empty_question: "Questions empty"
   user:
     logged_as: "Logged as"
     logout: "Logout"

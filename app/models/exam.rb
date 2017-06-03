@@ -16,7 +16,7 @@ class Exam < ApplicationRecord
 	private
 
 	def presence_of_questions
-		errors.add(:exams, "Sem questão") if self.questions.empty?
+		errors.add(:questions, I18n.t("exam.error.empty_questions")) if self.questions.empty?
 	end
 
 	def before_adding_students(student)
