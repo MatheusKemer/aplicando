@@ -1,5 +1,7 @@
-<% @question.where('teacher_id IS NOT ?', current_user.id).sort_by{|a| a.created_at || 0}.reverse.each do |question|%>
-	<h1> Prof. <%= question.teacher.name%> </h1>
-	<%= render "questions/teacher_question" , question: question%>
-	<%= render "questions/like_dislike", question: question %>
+<% unless @questions.blank? %>
+  <% @questions.sort_by{|a| a.created_at || 0}.reverse.each do |question|%>
+  	<h1> Prof. <%= question.teacher.name%> </h1>
+  	<%= render "questions/teacher_question" , question: question%>
+  	<%= render "questions/like_dislike", question: question %>
+  <% end %>
 <% end %>

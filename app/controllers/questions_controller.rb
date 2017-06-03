@@ -64,7 +64,10 @@ class QuestionsController < ApplicationController
   end
 
   def discover
-    @question = Question.where(visible: true)
+    @questions = Question.all
+    @teacher_questions = current_user.questions
+    @questions = @questions - @teacher_questions
+    @questions.map {|q| q if q.visible == true}
   end
 
   def show
