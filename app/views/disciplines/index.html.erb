@@ -2,12 +2,18 @@
   <%= link_to I18n.t("discipline.new"), new_discipline_path, class: "pull-right btn btn-default" %>
 <% end %>
 <h1><%=I18n.t("discipline.your_disciplines")%></h1>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th><%= I18n.t("discipline.name") %></th>
       <th><%= I18n.t("discipline.class") %></th>
-      <th colspan="3"></th>
+      <% if current_user.teacher? %>
+        <% unless discipline.teacher.id == current_user.id %>
+          <th></th>
+        <% end %>
+        <% elsif current_user.student? %>
+          <th></th>
+        <% end %>
     </tr>
   </thead>
 
