@@ -14,7 +14,7 @@
  *= require_self
  */
 body {
-    background: url('bg.jpg') no-repeat 0 0;
+    background: image-url('bg.jpg') no-repeat 0 0;
     background-size: cover;
 }
 
@@ -37,4 +37,4 @@ body {
 .login a {
     text-decoration: none;
     color: white;
-}
+}s
