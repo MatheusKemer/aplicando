@@ -14,7 +14,7 @@
  *= require_self
  */
 body {
-    background: image-url('bg.jpg') no-repeat 0 0;
+    background: url('bg.jpg') no-repeat 0 0;
     background-size: cover;
 }
 
