@@ -40,6 +40,7 @@
     <div class="container">
       <div class="teste">
       <nav class="nav-main">
+        <%if current_user.admin? %> <%= link_to "#{I18n.t("nav.teacher")}", teachers_path %> <% end %>
         <%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %>
         <%if current_user.teacher? %> <%= link_to "#{I18n.t("nav.discover")}", discover_path %> <% end %>
         <%if current_user.teacher? %> <%= link_to "#{I18n.t("nav.questions")}", questions_path %> <% end %>

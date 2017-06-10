@@ -29,6 +29,7 @@ en:
     questions: "Questions"
     class: "Class"
     discover: "Discover"
+    teacher: "Teachers"
   menu:
     show: "Show"
     back: "Back"
@@ -47,6 +48,8 @@ en:
     not_logged: "You are not logged in"
     your_exams: "Your Exams"
     questions: "Questions"
+    all_exams: "All exams"
+    teacher: "Teacher"
     error:
       unavailable: "Unavailable for you"
       empty_question: "Questions empty"
@@ -58,6 +61,7 @@ en:
     title: "Student"
   discipline:
     your_disciplines: "Your Disciplines"
+    your_disciplines-admin: "All Disciplines"
     name: "Name"
     class: "Class"
     join: "Join"
@@ -65,6 +69,10 @@ en:
     new: "New Discipline"
     error:
       already_student: "Student %{student} already in discipline"
+      name: "is necessary"
+  teacher:
+    name: "Name"
+    discipline: "Discipline"
   error:
     exam_already_exists: "Already exists"
     cannot_like_own_question: "Can't like your own question, your idiot"

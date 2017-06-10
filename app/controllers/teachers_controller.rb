@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.json
   def index
-    binding.pry
+    @teachers = Teacher.all
   end
 
   # GET /teachers/1

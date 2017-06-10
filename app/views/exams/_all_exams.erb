@@ -1,0 +1,39 @@
+  <head>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  </head>
+
+  <p id="notice"><%= notice %></p>
+
+  <h1><%=I18n.t("exam.all_exams")%></h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%=I18n.t("exam.title")%></th>
+        <th><%=I18n.t("exam.discipline")%></th>
+        <th><%=I18n.t("exam.teacher")%></th>
+        <th><%=I18n.t("exam.students")%></th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% exams.each do |exam|%>
+        <tr>
+          <td><%= exam.title %></td>
+          <td><%= exam.discipline.name %></td>
+          <td><%= exam.teacher.name %></td>
+          <td>
+            <a>
+              <% Done.where(exam_id: exam.id).each do |done|%>
+                <%=link_to done.student.name, done_path(done.id) %>
+              <% end %>
+            </a>
+          </td>
+          <td><%= link_to 'Show', exam %></td>
+          <td> <%if Done.where(student_id: current_user.id, exam_id: exam.id).first.present?%><i class="fa fa-check-square-o" aria-hidden="true"></i></td> <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>

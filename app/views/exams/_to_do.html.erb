@@ -9,7 +9,7 @@
           <%= @exam.questions[i].pergunta %>
           <br />
           <% @exam.questions[i].answers.each_with_index do |answer, index|%>
-          <%binding.pry%>
+
            <span> <input type="radio" name="<%=i%>" value="<%=index%>" %>
               <%=answer%> </span>
           <br />

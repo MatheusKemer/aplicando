@@ -6,8 +6,15 @@
 <p>
   <strong>Classe:</strong>
   <%= @discipline.school_class.ano %>
-
 </p>
 
+<ul>
+  <% if current_user.admin? %>
+    <% @discipline.students.each do |student| %>
+      <li> <%= student.name %> </li>
+    <% end %>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_discipline_path(@discipline) %> |
-<%= link_to 'Back', disciplines_path %>
+<%= link_to 'Back', current_user.teacher? ? disciplines_path : @discipline.teacher %>

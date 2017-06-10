@@ -5,12 +5,15 @@ class ExamsController < ApplicationController
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.where(teacher_id: current_user.id)
+    @exams = Exam.where(teacher_id: current_user.id) if current_user.teacher?
+    @exams = Exam.all
   end
 
   # GET /exams/1
   # GET /exams/1.json
   def show
+    done = Done.find_by student_id: current_user.id, exam_id: @exam.id
+    redirect_to done_path(done.id) if done.present?
   end
 
   # GET /exams/new

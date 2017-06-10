@@ -1,13 +1,8 @@
 <% if user_signed_in? %>
-  <% unless current_user.teacher? %>
+  <% unless current_user.teacher? || current_user.admin?%>
 	  <%# if @exam.students.map{|s| s.name}.include? Student.where(id: current_user.id).first.name%>
-		<%if true %>
-			<%a = Done.where student_id: current_user.id, exam_id: @exam.id%>
-			<%if a.empty?%>
+		<%if @exam.discipline.students.include? current_user %>
 			 <%= render 'to_do', exam: @exam%>
-			<% else %>
-			  <%= render 'done', exam: @exam, done: @done = Done.where(exam_id: @exam.id, student_id: current_user.id).first%>
-			<% end %>
 		<% else %>
 			<br />
 			<%= I18n.t("exam.error.unavailable")%>

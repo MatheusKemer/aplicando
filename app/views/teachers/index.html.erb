@@ -1,0 +1,21 @@
+<h1>Bem-vindo admin </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%=I18n.t("teacher.name")%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= link_to teacher.name, teacher %></td>
+        <td><%#= link_to 'Edit', edit_teacher_path(teacher) %></td>
+        <td><%#= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

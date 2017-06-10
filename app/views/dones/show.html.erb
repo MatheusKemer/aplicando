@@ -1,11 +1,9 @@
-
-
 <p>
-  <strong> Aluno: <%= @done.student.name if current_user.teacher? %> </strong>
+  <strong> Aluno: <%= @done.student.name if current_user.student? %> </strong>
 </p>
 <p>
   <strong>Prova:</strong>
-  <%= link_to @done.exam.title, @done.exam %>
+  <%= @done.exam.title %>
 </p>
 
 <p>

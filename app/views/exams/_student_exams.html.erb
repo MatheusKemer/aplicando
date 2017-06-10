@@ -16,19 +16,20 @@
         <th colspan="3"></th>
       </tr>
     </thead>
-    <%binding.pry%>
-    <tbody>
-      <% current_user. %>
-      <% done = Done.where(exam_id: exam.id, student_id: current_user.id).first %>
-        <tr>
-          <td><%= exam.title %></td>
-        	<td colspan="1"><%= done.try(:nota) %></td>
-          <td><%= exam.discipline.name%></td>
-          <td> <%if done.present? %> S </i>
-    <%end%></td>
-          <td><%= link_to 'Show', exam %></td>
-      	</tr>
 
+    <tbody>
+      <% @exams.each do |exam| %>
+        <% done = Done.find_by exam_id: exam.id, student_id: current_user.id %>
+        <% if exam.discipline.students.include? current_user%>
+          <tr>
+            <td><%= exam.title %></td>
+          	<td colspan="1"><%= done.try(:nota) %></td>
+            <td> <%= exam.discipline.name%></td>
+            <td> <%= done.present? ? "S" : "N"%> </td>
+            <td> <%= link_to (done.present? ? 'Ver' : 'Fazer'), exam %></td>
+        	</tr>
+        <% end %>
+      <% end %>
     </tbody>
   </table>
 
