@@ -1,7 +1,7 @@
 <h2>- <%= question.pergunta %></h2>
 <%= I18n.t("exam.discipline") %>: <%= question.discipline.name %>
 <br><br>
-Respostas:
+<%= I18n.t("question.alternatives") %>
 <ul>
     <% question.answers.each do |answer| %>
 	  	<li> <h3> <%=answer%> <%= "*" if question.correct == answer%> </h3> </li>

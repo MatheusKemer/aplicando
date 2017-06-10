@@ -39,11 +39,9 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <title>Aplicando</title>
-  <%= stylesheet_link_tag    "application", media: "all",
-  																					"data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application",
-																						"data-turbolinks-track" => true %>
+  <title>aplicando</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -59,32 +57,27 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Aplicando</a>
+            <%= link_to 'aplicando', home_path, :class => "navbar-brand"%>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+              <li><%= (link_to "#{I18n.t("nav.teacher")}", teachers_path) if current_user.admin? %> </li>
               <li><%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %></li>
-              <%if current_user.teacher? %>
-                <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li>
-              <% end %>
-              <%if current_user.teacher? %>
-                <li><%= link_to "#{I18n.t("nav.questions")}", questions_path %></li>
-              <% end %>
+              <li><%= (link_to "#{I18n.t("nav.discover")}", discover_path) unless current_user.student? %></li>
+              <li><%= (link_to "#{I18n.t("nav.questions")}", questions_path) if current_user.teacher? %></li>
               <li><%= link_to "#{I18n.t("nav.exam")}", exams_path %></li>
               <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
               <li><%= link_to "#{I18n.t("nav.faq")}", faq_path %></li>
               <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%="#{I18n.t("user.logged_as")} #{current_user.name} "%></li>
+              <li><a><%= I18n.t("user.logged_as") + ' ' + current_user.try(:name) %></a></li>
               <li><%= link_to("#{I18n.t("user.logout")}", destroy_user_session_path, :method => :delete) %></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
-        <%if current_user.admin? %> <%= link_to "#{I18n.t("nav.teacher")}", teachers_path %> <% end %>
       </nav>
   <%else%>
     <%la = request.original_url.split('/').last%>
@@ -119,7 +112,7 @@
   <div style="text-align: center;width: 60%;margin-left: 20%;">
     <div class="alert alert-dismissible alert-warning" role="alert">
      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-     <%= flash[:alert] %> 
+     <%= flash[:alert] %>
      </div>
   </div>
   <% end %>

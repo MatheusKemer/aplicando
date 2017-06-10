@@ -65,6 +65,7 @@ class QuestionsController < ApplicationController
   end
 
   def discover
+    return @questions = Question.all if current_user.admin?
     @questions = Question.all
     @teacher_questions = current_user.questions
     @questions = @questions - @teacher_questions

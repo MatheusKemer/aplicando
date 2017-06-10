@@ -2,17 +2,19 @@
   .my_class .input {background-color: black}
 </style>
 
-Total: <%= question.likes %>
+<%= I18n.t("question.total_likes") %>: <%= question.likes %>
 <br />
-<%= question.likers%>
-<%= button_to "Like", like_path, params: {question: question} %>
+<% if current_user.teacher?%>
+  <%= question.likers%>
+  <%= button_to I18n.t("question.like"), like_path, params: {question: question} %>
+<% end %>
 
-
-Total: <%= question.dislikes %>
+<%= I18n.t("question.total_dislikes") %>: <%= question.dislikes %>
 <br />
-<%= question.dislikers%>
-<%= button_to "Dislike", dislike_path, params: {question: question} %>
-
+<% if current_user.teacher? %>
+  <%= question.dislikers%>
+  <%= button_to I18n.t("question.dislike"), dislike_path, params: {question: question} %>
+<% end %>
 
 <%#Like AJAX%
 

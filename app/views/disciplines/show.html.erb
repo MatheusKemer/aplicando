@@ -1,10 +1,10 @@
 <p>
-  <strong>Name:</strong>
+  <strong><%= I18n.t("discipline.name") %>:</strong>
   <%= @discipline.name %>
 </p>
 
 <p>
-  <strong>Classe:</strong>
+  <strong><%= I18n.t("discipline.class") %>:</strong>
   <%= @discipline.school_class.ano %>
 </p>
 
@@ -16,5 +16,5 @@
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_discipline_path(@discipline) %> |
-<%= link_to 'Back', current_user.teacher? ? disciplines_path : @discipline.teacher %>
+<%= link_to I18n.t("menu.show"), edit_discipline_path(@discipline) %> |
+<%= link_to I18n.t("menu.back"), current_user.teacher? ? disciplines_path : @discipline.teacher %>

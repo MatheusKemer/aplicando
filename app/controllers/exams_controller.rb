@@ -83,7 +83,7 @@ class ExamsController < ApplicationController
     end
 
     def check_permission
-      redirect_to exams_path, flash: {alert: "Não permitido"} if current_user.student?
+      redirect_to exams_path, flash: {alert: I18n.t("error.permission_denied")} unless current_user.teacher? || current_user.admin?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

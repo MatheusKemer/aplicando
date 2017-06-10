@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 end
   resources :exams
   resources :students
-  get "/"  => "questions#index"
+  get "/"  => "home#index", :as => :home
 
   get "/student_dones/:student_id/:done_id" => "dones#show"
 

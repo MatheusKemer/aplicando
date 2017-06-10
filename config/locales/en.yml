@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  welcome: "Welcome"
   nav:
     help: "Help me"
     faq: "FAQ"
@@ -32,36 +33,59 @@ en:
     teacher: "Teachers"
   menu:
     show: "Show"
+    edit: "Edit"
     back: "Back"
     destroy: "Destroy"
-
   question:
+    discipline: "Discipline"
+    title: "Question title"
+    correct: "Correct"
+    alternative: "Alternative"
+    alternatives: "Alternatives"
+    editing: "Editing question"
+    owner: "Teacher"
+    all_questions: "Listing All Your Questions"
+    new: "Create New Question"
+    like: "Like"
+    total_likes: "Likes"
+    dislike: "Dislike"
+    total_dislikes: "Dislikes"
     error:
-
   exam:
     title: "Title"
     class: "Class"
     discipline: "Discipline"
-    nota: "Nota"
+    finish: "Finished"
+    grade: "Grade"
     students: "Students"
+    editing: "Editing Exam"
+    new: "New Exam"
     done: "Done"
-    not_logged: "You are not logged in"
     your_exams: "Your Exams"
     questions: "Questions"
     all_exams: "All exams"
     teacher: "Teacher"
+    finished?: "Finished?"
     error:
       unavailable: "Unavailable for you"
       empty_question: "Questions empty"
+  done:
+    answers: "Answers"
   user:
     logged_as: "Logged as"
     logout: "Logout"
     login: "Login"
+    name: "Name"
   student:
     title: "Student"
+    alert:
+      joined: "Student joined successfully"
+    error:
+      already_joined: "Student already joined this class"
   discipline:
     your_disciplines: "Your Disciplines"
     your_disciplines-admin: "All Disciplines"
+    editing: "Editing Discipline"
     name: "Name"
     class: "Class"
     join: "Join"
@@ -72,8 +96,11 @@ en:
       name: "is necessary"
   teacher:
     name: "Name"
-    discipline: "Discipline"
+    disciplines: "Disciplines"
+    new: "New Teacher"
   error:
+    not_logged: "You are not logged in"
+    permission_denied: "You don't have enough permission to access this page"
     exam_already_exists: "Already exists"
     cannot_like_own_question: "Can't like your own question, your idiot"
     cannot_dislike_own_question: "Can't dislike your own question, your idiot"

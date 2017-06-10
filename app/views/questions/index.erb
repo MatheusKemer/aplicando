@@ -1,22 +1,18 @@
-<% if current_user.type == "Teacher" %>
-	<h1>Listing All Your Questions</h1>
+<h1><%= I18n.t("question.all_questions") %></h1>
 
-	<%= link_to "Create New Question", new_question_path %>
-	<br />
+<%= link_to I18n.t("question.new"), new_question_path %>
+<br />
 
-	<% current_user.disciplines.each do |discipline| %>
-		<br> <strong> <%= discipline.name%> </strong>
-			<% discipline.questions.each do |question| %>
-				<br />
-		    - <td> <%= question.pergunta %> - </td>
-		    <td><%= link_to 'Show', question %></td>
-		    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-		    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-				<br>
-				 ____________________________________________________
-				 <br >
-			<% end %>
-	<% end %>
-<% else %>
-	ALUNO
+<% current_user.disciplines.each do |discipline| %>
+	<br> <strong> <%= discipline.name%> </strong>
+		<% discipline.questions.each do |question| %>
+			<br />
+	    - <td> <%= question.pergunta %> - </td>
+	    <td><%= link_to I18n.t("menu.show"), question %></td>
+	    <td><%= link_to I18n.t("menu.edit"), edit_question_path(question) %></td>
+	    <td><%= link_to I18n.t("menu.destroy"), question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<br>
+			 ____________________________________________________
+			 <br >
+		<% end %>
 <% end %>

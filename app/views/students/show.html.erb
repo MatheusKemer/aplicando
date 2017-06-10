@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= I18n.t("user.name") %></strong>
   <%= @student.name %>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to I18n.t("menu.edit"), edit_student_path(@student) %> |
+<%= link_to I18n.t("menu.back"), students_path %>

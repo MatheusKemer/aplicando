@@ -1,6 +1,6 @@
  <p id="notice"><%= notice %></p>
     <p>
-      <strong>Title:</strong>
+      <strong><%= I18n.t("exam.title") %></strong>
       <%= @exam.title %>
     </p>
       <br />
@@ -18,5 +18,5 @@
         <% end %>
       <input type="hidden" name="prova_id" value="<%=@exam.id%>">
       <input type="hidden" name="all" value="teste">
-      <%= submit_tag("Enviar") %>
+      <%= submit_tag(I18n.t("exam.finish")) %>
       <% end %>
