@@ -4,7 +4,7 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  margin: 33px;
+  padding: 33px;
 }
 
 p, ol, ul, td {
@@ -21,15 +21,10 @@ pre {
 }
 
 a {
-  color: #000;
-
-  &:visited {
-    color: #666;
-  }
+  color: #fff;
 
   &:hover {
     color: #fff;
-    background-color: #000;
   }
 }
 

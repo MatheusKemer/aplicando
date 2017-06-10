@@ -1,0 +1,149 @@
+/* line 1, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 33px;
+}
+
+/* line 10, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 33px;
+}
+
+/* line 17, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 23, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #fff;
+}
+/* line 26, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+}
+
+/* line 31, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+th {
+  padding-bottom: 5px;
+}
+
+/* line 35, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+td {
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* line 42, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 47, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 51, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 57, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 65, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 76, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* line 82, /Users/haruan/Projetos/iac_heroku/aplicando/app/assets/stylesheets/scaffolds.scss */
+label {
+  display: block;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+body {
+    background: url('bg.jpg') no-repeat 0 0;
+    background-size: cover;
+    color: white;
+}
+
+.help-block {
+    color: #EEE;
+}
+
+#check {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+}
+
+.login {
+    width: 300px;
+    height: 292px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin: -146px 0 0 -150px;
+}
+
+.login a {
+    text-decoration: none;
+    color: white;
+}
+
+.single-form {
+    width: 50%;
+    margin: 50px auto;
+}
+
+.radio_group input, .radio_group label {
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}

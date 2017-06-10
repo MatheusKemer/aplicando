@@ -13,3 +13,47 @@
  *= require_tree .
  *= require_self
  */
+body {
+    background: url('bg.jpg') no-repeat 0 0;
+    background-size: cover;
+    color: white;
+}
+
+.help-block {
+    color: #EEE;
+}
+
+#check {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+}
+
+.login {
+    width: 300px;
+    height: 292px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin: -146px 0 0 -150px;
+}
+
+.login a {
+    text-decoration: none;
+    color: white;
+}
+
+.single-form {
+    width: 50%;
+    margin: 50px auto;
+}
+
+.radio_group input, .radio_group label {
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.table {
+    width: 92%;
+}
