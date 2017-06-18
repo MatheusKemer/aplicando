@@ -38,6 +38,7 @@ end
 	get "/help" => "help#index"
 
   resources :questions
+  get "/questions/list-questions/:discipline_id" => "questions#list_questions"
   get '/discover' => "questions#discover"
 
   post '/like' => "questions#like"

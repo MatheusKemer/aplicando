@@ -29,6 +29,11 @@ class QuestionsController < ApplicationController
   def find_question
   end
 
+  def list_questions
+    @questions = Question.where discipline_id: params[:discipline_id]
+    render :layout => false
+  end
+
   def create
     attributes = question_attributes
     get_class_and_discipline attributes.delete(:discipline)

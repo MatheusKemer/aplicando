@@ -7,21 +7,13 @@
 
   <div class="select_discipline form-actions">
    <%= f.label :discipline , I18n.t("exam.discipline") %>
-    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.name}"]}] }, @exam.try(:discipline).try(:name)),{}, { :class => 'form-control' } %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.id}"]}] }, @exam.try(:discipline).try(:name)),{}, { :class => 'form-control' } %>
   </div>
 
   <div class="form-actions">
     <%= f.label :questions , I18n.t("exam.questions") %>
-    <% Discipline.all.each do |discipline|%>
-      <div class="discipline <%= discipline.name %> <% 'active' if @exam.try(:discipline).try(:name) == discipline%>">
-      <% discipline.questions.each do |question|%>
-        <input type="checkbox" name="<%=question.id%>" value="true" <%='checked' if @exam.questions.include? question %>>
-        <%= link_to "#{question.pergunta}", question %>
-        <hr style= "width: 10%; margin: 5px 0;">
-      <% end %>
-      </div>
-    <% end%>
-
+    <%= f.select :questions, @questions.map{|l| l.pergunta} ,{}, { :class => 'searchable' } %>
+    
   </div>
   <br >
   <%= f.button :submit %> <%= link_to 'Back', exams_path , { :class => 'btn btn-default' }%>
@@ -31,10 +23,53 @@
   $('.discipline.'+ $('#exam_discipline :selected').val()).css("display", "block")
 
   $('.select_discipline').on('change', function(){
-    $(".discipline").css("display", "none")
-    var value = $('#exam_discipline :selected').val();
-    $(".discipline."+value).css("display","block");
-  })
+    $('.searchable').html('');
+    $('.searchable').multiSelect('refresh');
+    $.get('/questions/list-questions/'+$('#exam_discipline').val(),function(data){
+      $('.searchable').html(data);
+      $('.searchable').multiSelect('refresh');
+    });
+    ///questions/list-questions/1
+    // $(".discipline").css("display", "none")
+    // var value = $('#exam_discipline :selected').val();
+    // $(".discipline."+value).css("display","block");
+  });
+
+  $('.searchable').multiSelect({
+    selectableHeader: "<input type='text' class='search-input form-control' placeholder='Search Options' autocomplete='off'>",
+    selectionHeader: "<input type='text' class='search-input form-control' placeholder='Search Selected' autocomplete='off'>",
+    afterInit: function(ms){
+      var that = this,
+          $selectableSearch = that.$selectableUl.prev(),
+          $selectionSearch = that.$selectionUl.prev(),
+          selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+          selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+      that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+      .on('keydown', function(e){
+        if (e.which === 40){
+          that.$selectableUl.focus();
+          return false;
+        }
+      });
+
+      that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+      .on('keydown', function(e){
+        if (e.which == 40){
+          that.$selectionUl.focus();
+          return false;
+        }
+      });
+    },
+    afterSelect: function(){
+      this.qs1.cache();
+      this.qs2.cache();
+    },
+    afterDeselect: function(){
+      this.qs1.cache();
+      this.qs2.cache();
+    }
+  });
 </script>
 
 <style>
