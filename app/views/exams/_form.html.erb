@@ -12,7 +12,7 @@
 
   <div class="form-actions">
     <%= f.label :questions , I18n.t("exam.questions") %>
-    <%= f.select :questions, @questions.map{|l| l.pergunta} ,{}, { :class => 'searchable' } %>
+    <%= f.select :questions, @questions.map{|l| l.pergunta} ,{}, {:multiple => "multiple", :class => 'searchable' } %>
     
   </div>
   <br >
