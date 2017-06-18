@@ -1,16 +1,16 @@
 <%= simple_form_for(@exam) do |f| %>
 <%#=flash[:alert] = I18n.t("exam.questions") + ' ' + @exam.errors[:questions].first if
                                                      @exam.errors[:questions].present?%>
-  <div class="form-inputs">
+  <div class="form-actions">
     <%= f.input :title %>
   </div>
 
-  <div class="select_discipline">
+  <div class="select_discipline form-actions">
    <%= f.label :discipline , I18n.t("exam.discipline") %>
-    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.name}"]}] }, @exam.try(:discipline).try(:name)) %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.name}"]}] }, @exam.try(:discipline).try(:name)),{}, { :class => 'form-control' } %>
   </div>
 
-  <div class="form-inputs">
+  <div class="form-actions">
     <%= f.label :questions , I18n.t("exam.questions") %>
     <% Discipline.all.each do |discipline|%>
       <div class="discipline <%= discipline.name %> <% 'active' if @exam.try(:discipline).try(:name) == discipline%>">
@@ -24,7 +24,7 @@
 
   </div>
   <br >
-  <%= f.submit %>
+  <%= f.button :submit %> <%= link_to 'Back', exams_path , { :class => 'btn btn-default' }%>
 <% end %>
 
 <script>

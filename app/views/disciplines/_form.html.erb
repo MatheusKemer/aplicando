@@ -5,10 +5,10 @@
   </div>
 
   <%= f.input :school_class do %>
-   <%= f.select :school_class, SchoolClass.all.map{ |l| l.ano } %>
+   <%= f.select :school_class, SchoolClass.all.map{ |l| l.ano },{}, { :class => 'form-control' }  %>
   <% end %>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit %> <%= link_to 'Back', disciplines_path , { :class => 'btn btn-default' }%>
   </div>
 <% end %>
