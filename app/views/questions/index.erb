@@ -1,7 +1,6 @@
 <% if current_user.type == "Teacher" %>
+	<%= link_to "Create New Question", new_question_path, class: "pull-right btn btn-default" %>
 	<h1>Listing All Your Questions</h1>
-
-	<%= link_to "Create New Question", new_question_path %>
 	<br />
 
 	<% current_user.disciplines.each do |discipline| %>
