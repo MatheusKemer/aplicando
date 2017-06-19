@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   def teste
     current_user.update locale: current_user.locale == "en" ? "pt-BR" : "en"
+    redirect_to :back
   end
 
   private
