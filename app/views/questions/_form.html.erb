@@ -1,21 +1,21 @@
-<br />
-<%= form_for @question do |f| %>
+<%= simple_form_for(@question) do |f| %>
 
-  <%= f.label :discipline , I18n.t("question.discipline") %>
-  <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ) %>
-
-  <div class="form-field">
+<div class="form-actions">
+    <%= f.label :discipline , I18n.t("question.discipline") %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ) %>
+</div><br>
+<div class="form-actions">
     <%= f.label :pergunta, I18n.t("question.title") %>
     <%= f.text_field :pergunta, class: "form-control" %>
-  </div>
+</div>
 
   <br />
 
   <div class="form-inputs">
-		<table>
+		<table class="table table-question">
 			<thead>
 				<tr>
-					<th><%= I18n.t("question.correct") %></th>
+					<th style="width: 80px;"><%= I18n.t("question.correct") %></th>
 					<th><%= I18n.t("question.alternative") %></th>
 				</tr>
 			</thead>
@@ -23,7 +23,7 @@
 				<% if @question.answers_empty? || !@question.valid? || params[:action] == "edit"%>
 				    <%for i in 0..4 do%>
 				    <tr>
-					    <td> <%= f.radio_button :correct, i, :checked => (@question.answers.index(@question.correct)==i) %> </td>
+					    <td align="center"> <%= f.radio_button :correct, i, :checked => (@question.answers.index(@question.correct)==i) %> </td>
 					   	<td> <%= f.text_field :answers, value:@question.answers[i] , class: "form-control", name: "question[answers][]" %> </td>
 				  	</tr>
 				  <% end %>
@@ -39,6 +39,6 @@
 	 	</table>
 	 </div>
 
-  <%= f.submit %>
+  <%= f.button :submit %> <%= link_to 'Back', questions_path , { :class => 'btn btn-default' }%>
 
 <% end %>

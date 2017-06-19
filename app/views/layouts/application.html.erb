@@ -24,24 +24,28 @@
     .img{
       vertical-align: middle;
     }
-    .table{
-      position: absolute;
-    }
   </style>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <title>Aplicando</title>
+  <%= javascript_include_tag "jquery-3.2.1.min",
+                                            "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "bootstrap.min", media: "all",
+                                            "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "bootstrap-theme.min", media: "all",
+                                            "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "bootstrap.min",
+                                            "data-turbolinks-track" => true %>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-  <title>aplicando</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all",
+                                            "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application",
+                                            "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "multi-select.dist", media: "all",
+  																					"data-turbolinks-track" => true %>
+  <%= javascript_include_tag "jquery.multi-select",
+                                            "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "jquery.quicksearch",
+																						"data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -57,7 +61,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <%= link_to 'aplicando', home_path, :class => "navbar-brand"%>
+            <a class="navbar-brand" href="/">Aplicando</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,12 +69,17 @@
             <ul class="nav navbar-nav">
               <li><%= (link_to "#{I18n.t("nav.teacher")}", teachers_path) if current_user.admin? %> </li>
               <li><%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %></li>
-              <li><%= (link_to "#{I18n.t("nav.discover")}", discover_path) unless current_user.student? %></li>
-              <li><%= (link_to "#{I18n.t("nav.questions")}", questions_path) if current_user.teacher? %></li>
+              <%if current_user.teacher? %>
+                <!-- <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li> -->
+              <% end %>
+              <%if current_user.teacher? %>
+                <li><%= link_to "#{I18n.t("nav.questions")}", questions_path %></li>
+              <% end %>
               <li><%= link_to "#{I18n.t("nav.exam")}", exams_path %></li>
-              <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
+              <!-- <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
               <li><%= link_to "#{I18n.t("nav.faq")}", faq_path %></li>
-              <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li>
+              <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li> -->
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <%= ["pt-BR", "en"].each do |l|%>
