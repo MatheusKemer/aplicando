@@ -23,11 +23,13 @@
             <td></td>
           <% end %>
         <% elsif current_user.student? %>
+          <td> 
           <% if discipline.students.nil? || (!discipline.students.include? current_user) %>
-            <td> <%= link_to I18n.t("discipline.join"), join_discipline_path(discipline) %> </td>
+            <%= link_to I18n.t("discipline.join"), join_discipline_path(discipline) %>
           <% else %>
-            <td> <%= link_to I18n.t("discipline.exit"), exit_discipline_path(discipline) %> </td>
+            <%= link_to I18n.t("discipline.exit"), exit_discipline_path(discipline) %>
           <% end %>
+           </td>
         <% end %>
       </tr>
     <% end %>
