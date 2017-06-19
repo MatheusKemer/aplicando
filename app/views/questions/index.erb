@@ -13,7 +13,7 @@
 			<tbody>
 				<% discipline.questions.each do |question| %>
 				<tr>
-			   		<td> <%= question.pergunta %> - </td>
+			   		<td> <%= question.pergunta %></td>
 			    	<td style="width:150px"><%= link_to 'Show', question %> <%= link_to 'Edit', edit_question_path(question) %> <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				</tr>
 				<% end %>
