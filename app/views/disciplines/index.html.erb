@@ -18,7 +18,7 @@
         <td><%= discipline.school_class.ano %></td>
         <% if current_user.teacher? %>
           <% if discipline.teacher.id == current_user.id %>
-            <td><%= link_to I18n.t("menu.show"), discipline %> <%= link_to "Edit", edit_discipline_path(discipline) %> <%= link_to "Destroy", discipline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to "Edit", edit_discipline_path(discipline) %> <%= link_to "Destroy", discipline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% else %>
             <td></td>
           <% end %>
