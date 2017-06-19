@@ -83,7 +83,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <%= ["pt-BR", "en"].each do |l|%>
-              <li><%= link_to (current_user.locale == l ? "*#{l}*" : l), teste_path, :method => :post %></li>
+              <li><%= link_to (current_user.locale == l ? "*#{l}*" : l), teste_path, :onclick => 'window.location.reload(true);', :method => :post %></li>
             <% end %>
               <li><a><%= "#{I18n.t("user.logged_as")} #{current_user.try(:name)}" %></a></li>
               <li><%= link_to("#{I18n.t("user.logout")}", destroy_user_session_path, :method => :delete) %></li>
