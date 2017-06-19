@@ -7,12 +7,19 @@ class ApplicationController < ActionController::Base
   #load_and_authorize_resource
   #before_action :verify_user
   skip_before_filter :verify_authenticity_token
+  before_action :set_user_type
 
   def teste
     current_user.update locale: current_user.locale == "en" ? "pt-BR" : "en"
   end
 
   private
+
+  def set_user_type
+    user = current_user
+    user.type ||= "Student"
+    user.save
+  end
 
   def set_locale
     I18n.locale = current_user.try(:locale) || "pt-BR"

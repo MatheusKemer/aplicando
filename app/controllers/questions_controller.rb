@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :destroy, :update]
 
   def index
-    current_user.type ||= "Student"
     redirect_to students_path if current_user.type == "Student"
     redirect_to teachers_path if current_user.type == "Admin"
     @question = Question.all
