@@ -2,5 +2,5 @@
 
 <%= render 'form', student: @student %>
 
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+<%= link_to I18n.t("menu.show"), @student %> |
+<%= link_to I18n.t("menu.back"), students_path %>

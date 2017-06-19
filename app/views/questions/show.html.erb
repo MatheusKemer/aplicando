@@ -1,15 +1,17 @@
 <%= render "teacher_question", question: @question%>
+
 <p><%= l @question.created_at %>
+
 <p><%= @question.discipline.name %>
 <br>
 <br>
 
-<%= link_to "Edit", edit_question_path(@question) %>
+<%= link_to I18n.t("menu.show"), edit_question_path(@question) %>
 
 <br>
 
-<%= link_to "All Questions", questions_path %>
+<%= link_to I18n.t("menu.back"), questions_path %>
 
 <br>
 
-<%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to I18n.t("menu.destroy"), @question, method: :delete, data: { confirm: 'Are you sure?' } %>

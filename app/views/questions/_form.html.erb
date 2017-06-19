@@ -1,13 +1,13 @@
 <%= simple_form_for(@question) do |f| %>
 
 <div class="form-actions">
-  <%= f.label :discipline , "Disciplina" %>
-  <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ),{}, { :class => 'form-control' } %>
-</div><br />
-  <div class="form-actions">
-    <%= f.label :pergunta, "Título da questão" %>
+    <%= f.label :discipline , I18n.t("question.discipline") %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ) %>
+</div><br>
+<div class="form-actions">
+    <%= f.label :pergunta, I18n.t("question.title") %>
     <%= f.text_field :pergunta, class: "form-control" %>
-  </div>
+</div>
 
   <br />
 
@@ -15,19 +15,15 @@
 		<table class="table table-question">
 			<thead>
 				<tr>
-					<th style="width: 80px;">Correta</th>
-					<th>Alternativa</th>
+					<th style="width: 80px;"><%= I18n.t("question.correct") %></th>
+					<th><%= I18n.t("question.alternative") %></th>
 				</tr>
 			</thead>
 			<tbody>
-			<%#binding.pry%>
 				<% if @question.answers_empty? || !@question.valid? || params[:action] == "edit"%>
-					<%# @question.answers.each_with_index do |answer, i| %>
 				    <%for i in 0..4 do%>
 				    <tr>
 					    <td align="center"> <%= f.radio_button :correct, i, :checked => (@question.answers.index(@question.correct)==i) %> </td>
-					    <!-- <td> <input type="radio" name="correct" value="<%=i%>" %> </td> -->
-					    <!-- <td> <input type="text" name="answers[]" value="<%=@question.answers[i].present? ? @question.answers[i] : nil%>"> </td> -->
 					   	<td> <%= f.text_field :answers, value:@question.answers[i] , class: "form-control", name: "question[answers][]" %> </td>
 				  	</tr>
 				  <% end %>

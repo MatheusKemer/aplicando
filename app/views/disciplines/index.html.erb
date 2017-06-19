@@ -1,8 +1,6 @@
-<% if current_user.teacher? %>
-  <%= link_to I18n.t("discipline.new"), new_discipline_path, class: "pull-right btn btn-default" %>
-<% end %>
-<h1><%=I18n.t("discipline.your_disciplines")%></h1>
-<table class="table table-bordered">
+<h1><%=I18n.t("discipline.your_disciplines#{'-admin' if current_user.admin?}")%></h1>
+
+<table>
   <thead>
     <tr>
       <th><%= I18n.t("discipline.name") %></th>

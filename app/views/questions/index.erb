@@ -1,6 +1,7 @@
+
 <% if current_user.type == "Teacher" %>
-	<%= link_to "Create New Question", new_question_path, class: "pull-right btn btn-default" %>
-	<h1>Listing All Your Questions</h1>
+	<%= link_to I18n.t("question.new"), new_question_path, class: "pull-right btn btn-default" %>
+	<h1><%= I18n.t("question.all_questions") %></h1>
 	<br />
 
 	<% current_user.disciplines.each do |discipline| %>
@@ -14,12 +15,10 @@
 				<% discipline.questions.each do |question| %>
 				<tr>
 			   		<td> <%= question.pergunta %></td>
-			    	<td style="width:150px"><%= link_to 'Show', question %> <%= link_to 'Edit', edit_question_path(question) %> <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			    	<td style="width:150px"><%= link_to I18n.t("menu.show"), question %> <%= link_to I18n.t("menu.edit"), edit_question_path(question) %> <%= link_to I18n.t("menu.destroy"), question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				</tr>
 				<% end %>
 			</tbody>
 		</table>
 	<% end %>
-<% else %>
-	
 <% end %>

@@ -1,6 +1,6 @@
-<h1>Editing Discipline</h1>
+<h1> <%= I18n.t("discipline.editing") %> </h1>
 
 <%= render 'form', discipline: @discipline %>
 
-<%= link_to 'Show', @discipline %> |
-<%= link_to 'Back', disciplines_path %>
+<%= link_to I18n.t("menu.show"), @discipline %> |
+<%= link_to I18n.t("menu.back"), disciplines_path %>

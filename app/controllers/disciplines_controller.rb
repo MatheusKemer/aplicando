@@ -15,10 +15,11 @@ class DisciplinesController < ApplicationController
 
   def join
     return unless current_user.student?
-    return redirect_to disciplines_path, alert: "Aluno já adicionado" unless @discipline.add_students current_user
+    return redirect_to disciplines_path, alert: I18n.t("student.error.already_joined") unless
+                                                       @discipline.add_students current_user
     respond_to do |format|
       if @discipline.save
-        format.html { redirect_to disciplines_path, notice: "Student joined successfully"}
+        format.html { redirect_to disciplines_path, notice: I18n.t("student.alert.joined")}
         format.json { render :show, status: :created, location: @discipline }
       else
         #flash[:alert] = @discipline.errors.full_messages
@@ -100,7 +101,7 @@ class DisciplinesController < ApplicationController
     end
 
     def check_permission
-      redirect_to exams_path, flash: {alert: "Não permitido"} if current_user.student?
+      redirect_to exams_path, flash: {alert: "Não permitido"} unless current_user.teacher? || current_user.admin?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

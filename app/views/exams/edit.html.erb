@@ -1,6 +1,6 @@
-<h1>Editing Exam</h1>
+<h1><%= I18n.t("exam.editing") %></h1>
 
 <%= render 'form', exam: @exam %>
 
-<%= link_to 'Show', @exam %> |
-<%= link_to 'Back', exams_path %>
+<%= link_to I18n.t("menu.show"), @exam %> |
+<%= link_to I18n.t("menu.back"), exams_path %>

@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     redirect_to students_path if current_user.type == "Student"
+    redirect_to teachers_path if current_user.type == "Admin"
     @question = Question.all
   end
 
@@ -69,6 +70,7 @@ class QuestionsController < ApplicationController
   end
 
   def discover
+    return @questions = Question.all if current_user.admin?
     @questions = Question.all
     @teacher_questions = current_user.questions
     @questions = @questions - @teacher_questions

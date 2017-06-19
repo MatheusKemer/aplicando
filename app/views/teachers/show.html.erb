@@ -1,0 +1,30 @@
+
+<ul>
+  <li>
+    <strong><%= I18n.t("teacher.name")%>:</strong>
+    <%= @teacher.name %>
+  </li>
+
+   <table>
+    <thead>
+      <tr>
+          <th>
+            <li> <%= I18n.t("teacher.disciplines")%>: </li>
+          </th>
+      </tr>
+    </thead>
+    <% @teacher.disciplines.each do |discipline| %>
+    <tbody>
+      <tr>
+        <td>
+        <%= link_to discipline.name, discipline %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</ul>
+
+<br>
+<%# link_to 'Edit', edit_teacher_path(@teacher) %>
+<%= link_to I18n.t("menu.back"), teachers_path %>

@@ -1,21 +1,23 @@
-
-
 <p>
-  <strong> Aluno: <%= @done.student.name if current_user.teacher? %> </strong>
+  <strong> <%= I18n.t("student.title") %>: <%= @done.student.name if current_user.student? %> </strong>
 </p>
 <p>
-  <strong>Prova:</strong>
-  <%= link_to @done.exam.title, @done.exam %>
+  <strong><%= I18n.t("exam.title") %>:</strong>
+  <%= @done.exam.title %>
 </p>
 
 <p>
-  <strong>Nota:</strong>
+  <strong><%= I18n.t("exam.grade") %>:</strong>
   <%= @done.nota %>
 </p>
 
-<% @done.exam.questions.each_with_index do |question, index| %>
+<p>
+  <strong><%= I18n.t("done.answers") %>:</strong>
 
-  <p> - <%= question.pergunta %>:   <%= question.answers[(@done.respostas[index]).to_i]%></p>
+<% @done.exam.questions.each_with_index do |question, index| %>
+  <ul>
+    <li> <%= question.pergunta %>  - <%= question.answers[(@done.respostas[index]).to_i]%> </li>
+  </ul>
 <% end %>
 
-<%= link_to 'Back', dones_path %>
+<%= link_to I18n.t("menu.back"), dones_path %>
