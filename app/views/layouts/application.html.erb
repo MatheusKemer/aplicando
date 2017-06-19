@@ -69,15 +69,15 @@
             <ul class="nav navbar-nav">
               <li><%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %></li>
               <%if current_user.teacher? %>
-                <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li>
+                <!-- <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li> -->
               <% end %>
               <%if current_user.teacher? %>
                 <li><%= link_to "#{I18n.t("nav.questions")}", questions_path %></li>
               <% end %>
               <li><%= link_to "#{I18n.t("nav.exam")}", exams_path %></li>
-              <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
+              <!-- <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
               <li><%= link_to "#{I18n.t("nav.faq")}", faq_path %></li>
-              <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li>
+              <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li> -->
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
