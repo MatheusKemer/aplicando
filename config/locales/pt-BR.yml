@@ -1,0 +1,95 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+pt-BR:
+  welcome: "Bem-vindo"
+  nav:
+    help: "Ajuda"
+    faq: "FAQ"
+    about: "Sobre nós"
+    exam: "Exames"
+    disciplines: "Disciplinas"
+    questions: "Questões"
+    class: "Turma"
+    discover: "Descubra"
+    teacher: "Professor"
+  menu:
+    show: "Mostrar"
+    edit: "Editar"
+    back: "Voltar"
+    destroy: "Destruir"
+  question:
+    discipline: "Disciplina"
+    title: "Título da questão"
+    correct: "Correta"
+    alternative: "Alternativa"
+    alternatives: "Alternativas"
+    owner: "Professor"
+    all_questions: "Listing All Your Questions"
+    new: "Create New Question"
+    like: "Like"
+    total_likes: "Likes"
+    dislike: "Dislike"
+    total_dislikes: "Dislikes"
+    error:
+  exam:
+    title: "Title"
+    class: "Class"
+    discipline: "Discipline"
+    nota: "Nota"
+    students: "Students"
+    done: "Done"
+    not_logged: "You are not logged in"
+    your_exams: "Your Exams"
+    questions: "Questions"
+    all_exams: "All exams"
+    teacher: "Teacher"
+    error:
+      unavailable: "Unavailable for you"
+      empty_question: "Questions empty"
+  user:
+    logged_as: "Logged as"
+    logout: "Logout"
+    login: "Login"
+    name: "Name"
+  student:
+    title: "Student"
+  discipline:
+    your_disciplines: "Your Disciplines"
+    your_disciplines-admin: "All Disciplines"
+    name: "Name"
+    class: "Class"
+    join: "Join"
+    exit: "Exit"
+    new: "New Discipline"
+    error:
+      already_student: "Student %{student} already in discipline"
+      name: "is necessary"
+  teacher:
+    name: "Name"
+    disciplines: "Disciplines"
+  error:
+    exam_already_exists: "Already exists"
+    cannot_like_own_question: "Can't like your own question, your idiot"
+    cannot_dislike_own_question: "Can't dislike your own question, your idiot"
+    already_liked_it: "Question already liked"
+    already_disliked_it: "Question already disliked"
+    teste: "It's necessary a correct answer"

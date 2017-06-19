@@ -73,7 +73,10 @@
               <li><%= link_to "#{I18n.t("nav.help")}", help_path %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a><%= I18n.t("user.logged_as") + ' ' + current_user.try(:name) %></a></li>
+            <%= ["pt-BR", "en"].each do |l|%>
+              <li><%= link_to (current_user.locale == l ? "*#{l}*" : l), teste_path, :method => :post %></li>
+            <% end %>
+              <li><a><%= "#{I18n.t("user.logged_as")} #{current_user.try(:name)}" %></a></li>
               <li><%= link_to("#{I18n.t("user.logout")}", destroy_user_session_path, :method => :delete) %></li>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -117,10 +120,23 @@
   </div>
   <% end %>
 
-
   <%= yield %>
+    </div>
 
+  <script>
+    window.alert("eae");
 
-  </div>
+    function func(){
+      $.ajax({
+        url: like_path
+        type: "POST"
+        data: 'like'
+      })
+      window.alert("era")
+    }
+
+    $('.like').click(function(){
+    });
+  </script>
 </body>
 </html>
