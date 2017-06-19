@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :destroy, :update]
+  before_action :set_user_type
 
   def index
     redirect_to students_path if current_user.type == "Student"
@@ -99,6 +100,12 @@ class QuestionsController < ApplicationController
 
 
   private
+
+  def set_user_type
+    user = current_user
+    user.type ||= "Student"
+    user.save
+  end
 
   def get_class_and_discipline(param)
     param = param.split '-'
