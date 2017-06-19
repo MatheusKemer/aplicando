@@ -2,7 +2,7 @@
 <%#=flash[:alert] = I18n.t("exam.questions") + ' ' + @exam.errors[:questions].first if
                                                      @exam.errors[:questions].present?%>
   <div class="form-actions">
-    <%= f.input :title %>
+    <%= f.input :title ,label:  I18n.t("exam.title") %>
   </div>
 
   <div class="select_discipline form-actions">
@@ -16,7 +16,7 @@
     
   </div>
   <br >
-  <%= f.button :submit %> <%= link_to 'Back', exams_path , { :class => 'btn btn-default' }%>
+  <%= f.button :submit, I18n.t("save") %> <%= link_to I18n.t("back"), exams_path , { :class => 'btn btn-default' }%>
 <% end %>
 
 <script>
@@ -36,8 +36,8 @@
   });
 
   $('.searchable').multiSelect({
-    selectableHeader: "<input type='text' class='search-input form-control' placeholder='Search Options' autocomplete='off'>",
-    selectionHeader: "<input type='text' class='search-input form-control' placeholder='Search Selected' autocomplete='off'>",
+    selectableHeader: "<input type='text' class='search-input form-control' placeholder='<%= I18n.t('exam.options') %>' autocomplete='off'>",
+    selectionHeader: "<input type='text' class='search-input form-control' placeholder='<%= I18n.t('exam.selected') %>' autocomplete='off'>",
     afterInit: function(ms){
       var that = this,
           $selectableSearch = that.$selectableUl.prev(),

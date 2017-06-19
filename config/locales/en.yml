@@ -21,6 +21,8 @@
 
 en:
   welcome: "Welcome"
+  save: "Save"
+  back: "Back"
   nav:
     help: "Help me"
     faq: "FAQ"

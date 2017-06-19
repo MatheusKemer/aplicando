@@ -15,7 +15,7 @@
 				<% discipline.questions.each do |question| %>
 				<tr>
 			   		<td> <%= question.pergunta %></td>
-			    	<td style="width:150px"><%= link_to I18n.t("menu.show"), question %> <%= link_to I18n.t("menu.edit"), edit_question_path(question) %> <%= link_to I18n.t("menu.destroy"), question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			    	<td style="width:180px"><%= link_to I18n.t("menu.show"), question %> <%= link_to I18n.t("menu.edit"), edit_question_path(question) %> <%= link_to I18n.t("menu.destroy"), question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				</tr>
 				<% end %>
 			</tbody>

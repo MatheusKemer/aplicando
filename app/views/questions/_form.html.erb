@@ -2,7 +2,7 @@
 
 <div class="form-actions">
     <%= f.label :discipline , I18n.t("question.discipline") %>
-    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ) %>
+    <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|c| ["#{c.name}", "#{group.ano}-#{c.name}"] }] } ),{}, { :class => 'form-control' } %>
 </div><br>
 <div class="form-actions">
     <%= f.label :pergunta, I18n.t("question.title") %>
@@ -39,6 +39,6 @@
 	 	</table>
 	 </div>
 
-  <%= f.button :submit %> <%= link_to 'Back', questions_path , { :class => 'btn btn-default' }%>
+  <%= f.button :submit, I18n.t('save') %> <%= link_to I18n.t('back'), questions_path , { :class => 'btn btn-default' }%>
 
 <% end %>
