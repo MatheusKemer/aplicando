@@ -34,14 +34,15 @@ class ExamsController < ApplicationController
     @discipline = params.delete(:discipline)
     @exam = Exam.new(params)
     @exam.teacher_id = current_user.id
-    @exam.discipline = Discipline.find_by name: @discipline
-    @exam.questions = @questions_id.map {|id| Question.find_by_id id}
+    @exam.discipline = Discipline.find_by_id @discipline
+    @exam.questions = @questions
     @exam.created_at = Time.current
     respond_to do |format|
       if @exam.save
         format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
+        puts @exam.errors.messages
         format.html { render :new }
         format.json { render json: @exam.errors, status: :unprocessable_entity }
       end
@@ -85,11 +86,12 @@ class ExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
-      @questions_id = []
-      discipline = Discipline.find_by name: params[:exam][:discipline]
-      Question.where(teacher_id: current_user.id, discipline: discipline).each do |q|
-        @questions_id << q.id if params["#{q.id}"] == "true"
+      @questions = []
+      params[:exam][:questions].each do |q|
+        if q != ""
+          @questions << Question.find(q)
+        end
       end
-      params.require(:exam).permit(:id, :title, :discipline)
+      params.require(:exam).permit(:id, :title, :discipline,:questions)
     end
 end

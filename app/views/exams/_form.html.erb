@@ -9,10 +9,10 @@
    <%= f.label :discipline , I18n.t("exam.discipline") %>
     <%= f.select :discipline, grouped_options_for_select(SchoolClass.all.map{ |group| [group.ano, group.disciplines.map{|d| ["#{d.name}", "#{d.id}"]}] }, @exam.try(:discipline).try(:name)),{}, { :class => 'form-control' } %>
   </div>
-
+  <br/>
   <div class="form-actions">
     <%= f.label :questions , I18n.t("exam.questions") %>
-    <%= f.select :questions, @questions.map{|l| l.pergunta} ,{}, {:multiple => "multiple", :class => 'searchable' } %>
+    <%= f.select :questions, @questions.map{|l| ["#{l.pergunta}", "#{l.id}"]} ,{}, {:multiple => "multiple", :class => 'searchable' } %>
     
   </div>
   <br >
