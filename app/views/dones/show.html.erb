@@ -16,7 +16,8 @@
 
 <% @done.exam.questions.each_with_index do |question, index| %>
   <ul>
-    <li> <%= question.pergunta %>  - <%= question.answers[(@done.respostas[index]).to_i]%> </li>
+    <li> <%= question.pergunta %>  => <%= question.answers[(@done.respostas[index]).to_i]%> </li>
+  <%= "Resposta correta: #{question.correct}" if question.answers[(@done.respostas[index]).to_i] != question.correct %>
   </ul>
 <% end %>
 

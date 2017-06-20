@@ -13,7 +13,7 @@
   <div class="form-actions">
     <%= f.label :questions , I18n.t("exam.questions") %>
     <%= f.select :questions, @questions.map{|l| ["#{l.pergunta}", "#{l.id}"]} ,{}, {:multiple => "multiple", :class => 'searchable' } %>
-    
+
   </div>
   <br >
   <%= f.button :submit, I18n.t("save") %> <%= link_to I18n.t("back"), exams_path , { :class => 'btn btn-default' }%>
@@ -37,7 +37,7 @@
 
   $('.searchable').multiSelect({
     selectableHeader: "<input type='text' class='search-input form-control' placeholder='<%= I18n.t('exam.options') %>' autocomplete='off'>",
-    selectionHeader: "<input type='text' class='search-input form-control' placeholder='<%= I18n.t('exam.selected') %>' autocomplete='off'>",
+    selectionHeader: "<input type='text' class='search-input form-control' placeholder='<%= I18n.t('exam.options') %>' autocomplete='off'>",
     afterInit: function(ms){
       var that = this,
           $selectableSearch = that.$selectableUl.prev(),

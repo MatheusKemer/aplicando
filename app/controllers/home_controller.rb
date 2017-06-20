@@ -11,5 +11,6 @@ class HomeController < ApplicationController
   end
 
   def index
+    redirect_to teachers_path if current_user.admin?
   end
 end

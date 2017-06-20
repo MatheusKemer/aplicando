@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-
+    <% exams = Exam.all if current_user.admin? %>
     <% exams.each do |exam|%>
         <tr>
           <td><%= exam.title %></td>

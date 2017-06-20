@@ -21,10 +21,14 @@
 
 pt-BR:
   welcome: "Bem-vindo"
+  admin:
+    welcome: "Olá admin"
+  sim: "sim"
+  nao: "não"
   save: "Salvar"
   back: "Voltar"
   nav:
-    help: "Ajuda"
+    help: "Me ajude"
     faq: "FAQ"
     about: "Sobre nós"
     exam: "Exames"
@@ -32,8 +36,9 @@ pt-BR:
     questions: "Questões"
     class: "Turma"
     discover: "Descubra"
-    teacher: "Professor"
+    teacher: "Professores"
   menu:
+    new: "Novo"
     show: "Mostrar"
     edit: "Editar"
     back: "Voltar"
@@ -44,60 +49,295 @@ pt-BR:
     correct: "Correta"
     alternative: "Alternativa"
     alternatives: "Alternativas"
+    editing: "Editando questão"
     owner: "Professor"
-    all_questions: "Suas Questões"
-    new: "Nova Questão"
-    editing: "Alterar Questão"
+    all_questions: "Mostrando todas suas questões"
+    new: "Criar nova questão"
     like: "Like"
-    total_likes: "Likes"
+    total_likes: "Curtidas"
     dislike: "Dislike"
-    total_dislikes: "Dislikes"
+    total_dislikes: "Descurtidas"
     error:
   exam:
     title: "Título"
-    class: "Classe"
+    class: "Turma"
     discipline: "Disciplina"
-    nota: "Nota"
-    new: "Novo Exame"
-    editing: "Alterar Exame"
-    options: "Buscar Opções"
-    selected: "Buscar Selecionadas"
+    finish: "Terminadas"
+    grade: "Nota"
     students: "Alunos"
-    done: "Feito"
-    not_logged: "Você não está logado"
-    your_exams: "Seus Exames"
+    editing: "Editando prova"
+    new: "Nova prova"
+    done: "Feita"
+    see: "Ver"
+    do: "Fazer"
+    options: "Pesquisar"
+    your_exams: "Suas provas"
     questions: "Questões"
-    all_exams: "Todos os Exames"
+    all_exams: "Todas as provas"
     teacher: "Professor"
+    finished?: "Finalizada?"
     error:
-      unavailable: "Não disponível para você"
-      empty_question: "Questões Vazias"
+      unavailable: "Não permitido pra você"
+      empty_question: "Questão vazia"
+  done:
+    answers: "Respostas"
   user:
-    logged_as: "Logged as"
-    logout: "Logout"
+    logged_as: "Logado como"
+    logout: "Sair"
     login: "Login"
-    name: "Name"
-  student:
-    title: "Student"
-  discipline:
-    editing: "Editar disciplina"
-    your_disciplines: "Suas disciplinas"
-    your_disciplines-admin: "Todas as disciplinas"
     name: "Nome"
-    class: "Classe"
-    join: "Participar"
+  student:
+    title: "Aluno"
+    alert:
+      joined: "Entrou com sucesso"
+    error:
+      already_joined: "Já entrou nessa turma"
+  discipline:
+    exited: "Aluno saiu"
+    joined: "Entrou com sucesso"
+    your_disciplines: "Suas disciplinas"
+    your_disciplines-admin: "Todas as Disciplinas"
+    editing: "Editando disciplina"
+    name: "Nome"
+    class: "Turma"
+    join: "Entrar"
     exit: "Sair"
     new: "Nova Disciplina"
     error:
-      already_student: "Aluno %{student} já está nessa disciplina"
+      already_student: "Aluno %{student} já nessa disicplina"
       name: "é necessário"
   teacher:
-    name: "Name"
-    disciplines: "Disciplines"
+    name: "Nome"
+    disciplines: "Disciplinas"
+    new: "Novo professor"
+    general: "Tela geral do professor"
   error:
-    exam_already_exists: "Already exists"
-    cannot_like_own_question: "Can't like your own question, your idiot"
-    cannot_dislike_own_question: "Can't dislike your own question, your idiot"
-    already_liked_it: "Question already liked"
-    already_disliked_it: "Question already disliked"
-    teste: "It's necessary a correct answer"
+    not_logged: "Você não está logado"
+    permission_denied: "YVocê não tem as permissões necessárias para acessar essa página"
+    exam_already_exists: "Já existe"
+    cannot_like_own_question: "Impossível curtir sua própria questão, your idiot"
+    cannot_dislike_own_question: "Não da pra descurtir sua questão, your idiot"
+    already_liked_it: "Já curtida"
+    already_disliked_it: "Já descurtida"
+    teste: "É necessário uma resposta correta"
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda-feira
+    - Terça-feira
+    - Quarta-feira
+    - Quinta-feira
+    - Sexta-feira
+    - Sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+    month_names:
+    -
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: "%{count} dias"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mês
+        other: "%{count} meses"
+      x_years:
+        one: 1 ano
+        other: "%{count} anos"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      present: deve ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      model_invalid: 'A validação falhou: %{errors}'
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      required: é obrigatório(a)
+      taken: já está em uso
+      too_long:
+        one: 'é muito longo (máximo: 1 caracter)'
+        other: 'é muito longo (máximo: %{count} caracteres)'
+      too_short:
+        one: 'é muito curto (mínimo: 1 caracter)'
+        other: 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length:
+        one: não possui o tamanho esperado (1 caracter)
+        other: não possui o tamanho esperado (%{count} caracteres)
+      other_than: deve ser diferente de %{count}
+    template:
+      body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: 'Não foi possível gravar %{model}: 1 erro'
+        other: 'Não foi possível gravar %{model}: %{count} erros'
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u %n"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: "."
+        format: "%n%"
+    precision:
+      format:
+        delimiter: "."
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  time:
+    am: ''
+    formats:
+      default: "%a, %d de %B de %Y, %H:%M:%S %z"
+      long: "%d de %B de %Y, %H:%M"
+      short: "%d de %B, %H:%M"
+    pm: ''

@@ -1,5 +1,5 @@
 <% unless @questions.blank? %>
-  <% @questions.sort_by{|a| a.created_at || 0}.reverse.each do |question|%>
+  <% @questions.sort_by{|a| a.likes || 0}.reverse.each do |question|%>
   	<h1> <%= I18n.t("question.owner") %> <%= link_to question.teacher.name, teacher_path(question.teacher.id) %> </h1>
   	<%= render "questions/teacher_question" , question: question%>
   	<%= render "questions/like_dislike", question: question %>

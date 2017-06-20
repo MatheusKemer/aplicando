@@ -118,6 +118,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_attributes
-    params.require(:question).permit(:discipline, :pergunta, :correct, :answers => [])
+    params.require(:question).permit(:discipline, :pergunta, :visible, :correct, :answers => [])
   end
 end

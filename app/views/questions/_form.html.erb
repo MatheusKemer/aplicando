@@ -39,6 +39,11 @@
 	 	</table>
 	 </div>
 
+  <div class="form-actions">
+    <%= f.input :visible, class: "form-control" %>
+  </div>
+
+
   <%= f.button :submit, I18n.t('save') %> <%= link_to I18n.t('back'), questions_path , { :class => 'btn btn-default' }%>
 
 <% end %>

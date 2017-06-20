@@ -1,9 +1,10 @@
 <html>
 	<body>
 
-		<h1> Tela geral do professor </h1>
+		<h1> <%= I18n.t("teacher.general") if current_user.teacher?%> </h1>
 
-		<%= link_to 'Provas do professor', exams_path %>
+		<%= link_to I18n.t("exam.your_exams"), exams_path if current_user.teacher? %>
+    <%= link_to 'Provas', exams_path if current_user.student? %>
 
 	</body>
 </html>

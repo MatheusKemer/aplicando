@@ -26,6 +26,8 @@ end
   get "/"  => "home#index", :as => :home
   post "/teste" => "application#teste", :as => :teste
 
+  get "/class" => "disciplines#class", :as => :class
+
   get "/student_dones/:student_id/:done_id" => "dones#show"
 
   get "/exam/all" => "exams#all"

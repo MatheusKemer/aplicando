@@ -69,7 +69,6 @@ class TeachersController < ApplicationController
     end
 
     def check_permission
-      binding.pry
       redirect_to exams_path, flash: {alert: "Não permitido"} unless current_user.admin?
     end
 

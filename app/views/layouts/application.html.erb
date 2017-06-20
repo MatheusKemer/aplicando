@@ -70,7 +70,7 @@
               <li><%= (link_to "#{I18n.t("nav.teacher")}", teachers_path) if current_user.admin? %> </li>
               <li><%= link_to "#{I18n.t("nav.disciplines")}", disciplines_path %></li>
               <%if current_user.teacher? %>
-                <!-- <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li> -->
+                <li><%= link_to "#{I18n.t("nav.discover")}", discover_path %></li>
               <% end %>
               <%if current_user.teacher? %>
                 <li><%= link_to "#{I18n.t("nav.questions")}", questions_path %></li>
@@ -82,7 +82,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <%= ["pt-BR", "en"].each do |l|%>
+            <% ["pt-BR", "en"].each do |l|%>
               <li><%= link_to (current_user.locale == l ? "*#{l}*" : l), teste_path, :onclick => 'window.location.reload(true);', :method => :post %></li>
             <% end %>
               <li><a><%= "#{I18n.t("user.logged_as")} #{current_user.try(:name)}" %></a></li>

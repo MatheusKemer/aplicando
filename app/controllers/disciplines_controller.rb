@@ -34,7 +34,7 @@ class DisciplinesController < ApplicationController
     @discipline.students = @discipline.students - [current_user] if @discipline.students.include? current_user
     respond_to do |format|
       if @discipline.save
-        format.html { redirect_to disciplines_path, notice: "Student out successfully"}
+        format.html { redirect_to disciplines_path, notice: I18n.t("discipline.exited")}
       end
     end
   end

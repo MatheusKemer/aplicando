@@ -5,11 +5,12 @@
     <tr>
       <th><%= I18n.t("discipline.name") %></th>
       <th><%= I18n.t("discipline.class") %></th>
-      <th width="150px"></th>
+      <% unless current_user.admin? %><th width="150px"></th> <% end %>
     </tr>
   </thead>
 
   <tbody>
+    <% @disciplines = Discipline.all if current_user.admin? %>
     <% @disciplines.each do |discipline| %>
       <tr>
         <td><%= discipline.name %></td>
@@ -21,7 +22,7 @@
             <td></td>
           <% end %>
         <% elsif current_user.student? %>
-          <td> 
+          <td>
           <% if discipline.students.nil? || (!discipline.students.include? current_user) %>
             <%= link_to I18n.t("discipline.join"), join_discipline_path(discipline) %>
           <% else %>
@@ -33,3 +34,5 @@
     <% end %>
   </tbody>
 </table>
+
+ <%= link_to I18n.t("discipline.new"), new_discipline_path if current_user.teacher? %>

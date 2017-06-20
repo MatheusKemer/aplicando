@@ -20,7 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  admin:
+    welcome: "Admin"
   welcome: "Welcome"
+  sim: "yes"
+  nao: "no"
   save: "Save"
   back: "Back"
   nav:
@@ -34,6 +38,7 @@ en:
     discover: "Discover"
     teacher: "Teachers"
   menu:
+    new: "New"
     show: "Show"
     edit: "Edit"
     back: "Back"
@@ -63,6 +68,9 @@ en:
     editing: "Editing Exam"
     new: "New Exam"
     done: "Done"
+    see: "See"
+    do: "do"
+    options: "Search"
     your_exams: "Your Exams"
     questions: "Questions"
     all_exams: "All exams"
@@ -85,6 +93,7 @@ en:
     error:
       already_joined: "Student already joined this class"
   discipline:
+    exited: "Student out successfully"
     your_disciplines: "Your Disciplines"
     your_disciplines-admin: "All Disciplines"
     editing: "Editing Discipline"
@@ -100,6 +109,7 @@ en:
     name: "Name"
     disciplines: "Disciplines"
     new: "New Teacher"
+    general: "Teacher general screen"
   error:
     not_logged: "You are not logged in"
     permission_denied: "You don't have enough permission to access this page"

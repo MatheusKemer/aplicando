@@ -1,14 +1,23 @@
-<%= simple_form_for(@discipline) do |f| %>
+<% if current_user.teacher? %>
+  <%= simple_form_for(@discipline) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :name ,label:  I18n.t("discipline.name")%>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :name ,label:  I18n.t("discipline.name")%>
+    </div>
 
-  <%= f.input :school_class,label:  I18n.t("discipline.class") do %>
-   <%= f.select :school_class, SchoolClass.all.map{ |l| l.ano },{}, { :class => 'form-control' }  %>
+    <%= f.input :school_class,label:  I18n.t("discipline.class") do %>
+     <%= f.select :school_class, SchoolClass.all.map{ |l| l.ano },{}, { :class => 'form-control' }  %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit, I18n.t("save") %> <%= link_to I18n.t("back"), disciplines_path , { :class => 'btn btn-default' }%>
+    </div>
   <% end %>
-
-  <div class="form-actions">
-    <%= f.button :submit, I18n.t("save") %> <%= link_to I18n.t("back"), disciplines_path , { :class => 'btn btn-default' }%>
-  </div>
+<% else %>
+  <% @school_class = SchoolClass.new%>
+  <%= simple_form_for(@school_class) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :ano ,label:  'teste' %>
+    </div>
+  <% end %>
 <% end %>
