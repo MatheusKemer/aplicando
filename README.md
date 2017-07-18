@@ -1,24 +1,17 @@
-# README
+aplicando
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+v1.0.2
 
-Things you may want to cover:
+Basic info
 
-* Ruby version
+This app was made for teachers for the possibility that can share their own questions and exams with other teacher, and at same time, enable exams and tests for students.
 
-* System dependencies
+At first version, the features enabled in app are:
+- Creating disciplines
+- Creating questions
+- Creating exams
+- List other theacher questions
+- Option to enable/disable your question for other teachers see
+- The possibility of the student finish the exam and show the grade.
+- Staff with CRUD options for teachers.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
