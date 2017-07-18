@@ -27,9 +27,14 @@ en:
   nao: "no"
   save: "Save"
   back: "Back"
+  home:
+    menu: "Your options"
+    exams: "Your exams"
+    fav: "Favorites questiins"
   nav:
     help: "Help me"
     faq: "FAQ"
+    fav: "Liked questions"
     about: "About us"
     exam: "Exams"
     disciplines: "Disciplines"
@@ -58,6 +63,8 @@ en:
     dislike: "Dislike"
     total_dislikes: "Dislikes"
     error:
+    warning:
+      no_fav: "You don't have any liked questions, yet"
   exam:
     title: "Title"
     class: "Class"
@@ -107,6 +114,7 @@ en:
       name: "is necessary"
   teacher:
     name: "Name"
+    teacher: "Teacher"
     disciplines: "Disciplines"
     new: "New Teacher"
     general: "Teacher general screen"

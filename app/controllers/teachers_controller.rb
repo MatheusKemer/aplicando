@@ -1,6 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only:  [:new, :create, :edit, :update, :destroy]
+  before_action :check_permission, only:  [:new, :create, :index, :edit, :update, :destroy]
 
   # GET /teachers
   # GET /teachers.json
@@ -60,6 +60,10 @@ class TeachersController < ApplicationController
       format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def favorites
+    @enable_teacher = true
   end
 
   private

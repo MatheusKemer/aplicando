@@ -31,4 +31,4 @@
 
 <br>
 <%# link_to 'Edit', edit_teacher_path(@teacher) %>
-<%= link_to I18n.t("menu.back"), teachers_path %>
+<%= link_to I18n.t("menu.back"), (current_user.admin? ? teachers_path : favorites_path) %>

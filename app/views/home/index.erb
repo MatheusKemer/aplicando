@@ -1,9 +1,16 @@
 <html>
 	<body>
 
-		<h1> <%= I18n.t("teacher.general") if current_user.teacher?%> </h1>
+		<h1> <%= I18n.t("welcome") + @name %><%#= I18n.t("teacher.general") if current_user.teacher?%> </h1>
 
-		<%= link_to I18n.t("exam.your_exams"), exams_path if current_user.teacher? %>
+    <%= I18n.t("home.menu")%>:
+    <ul>
+      <% if current_user.teacher? %>
+        <li><%= link_to I18n.t("home.exams"), exams_path %></li>
+        <li><%= link_to I18n.t("home.fav"), favorites_path%></li>
+      <% end %>
+    </ul>
+
     <%= link_to 'Provas', exams_path if current_user.student? %>
 
 	</body>

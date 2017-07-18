@@ -1,0 +1,7 @@
+<% if current_user.likeds.empty? %>
+  <%= I18n.t("question.warning.no_fav") %>
+<% else %>
+  <% current_user.likeds.each do |like|%>
+    <%= render "/questions/teacher_question", question: like.question%>
+  <% end %>
+<% end %>

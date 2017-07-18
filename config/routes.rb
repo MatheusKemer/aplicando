@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'sing_up' => 'users#create'
   resources :dones
   resources :teachers
+  get "/favorites" => "teachers#favorites"
 
   get "/disciplies/:id/join" => "disciplines#join", :as => :join_discipline
   get "/disciplies/:id/exit" => "disciplines#exit", :as => :exit_discipline

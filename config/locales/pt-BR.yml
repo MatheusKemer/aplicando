@@ -27,9 +27,14 @@ pt-BR:
   nao: "não"
   save: "Salvar"
   back: "Voltar"
+  home:
+    menu: "Suas opções"
+    exams: "Suas provas"
+    fav: "Questões favoritas"
   nav:
     help: "Me ajude"
     faq: "FAQ"
+    fav: "Minhas curtidas"
     about: "Sobre nós"
     exam: "Exames"
     disciplines: "Disciplinas"
@@ -58,6 +63,8 @@ pt-BR:
     dislike: "Dislike"
     total_dislikes: "Descurtidas"
     error:
+    warning:
+      no_fav: "Você não tem questões curtidas, ainda"
   exam:
     title: "Título"
     class: "Turma"
@@ -108,6 +115,7 @@ pt-BR:
       name: "é necessário"
   teacher:
     name: "Nome"
+    teacher: "Professor"
     disciplines: "Disciplinas"
     new: "Novo professor"
     general: "Tela geral do professor"

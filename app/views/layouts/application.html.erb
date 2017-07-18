@@ -74,6 +74,7 @@
               <% end %>
               <%if current_user.teacher? %>
                 <li><%= link_to "#{I18n.t("nav.questions")}", questions_path %></li>
+                <li><%= link_to "#{I18n.t("nav.fav")}", favorites_path %></li>
               <% end %>
               <li><%= link_to "#{I18n.t("nav.exam")}", exams_path %></li>
               <!-- <li><%= link_to "#{I18n.t("nav.about")}", about_us_path, id: "about" %></li>
