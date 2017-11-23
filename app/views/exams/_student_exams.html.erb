@@ -18,6 +18,7 @@
     <tbody>
       <% @exams.each do |exam| %>
         <% done = Done.find_by exam_id: exam.id, student_id: current_user.id %>
+        <% next if exam.discipline.students.nil? %>
         <% if exam.discipline.students.include? current_user%>
           <tr>
             <td><%= exam.title %></td>
