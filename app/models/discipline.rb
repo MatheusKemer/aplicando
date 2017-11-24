@@ -33,7 +33,7 @@ class Discipline < ApplicationRecord
       if self.students.include? eae
         return I18n.t("discipline.error.already_students", student: eae.name)
       else
-        @discipline.students = @discipline.students + [eae]
+        @discipline.students << eae
       end
     end
     @discipline.save
