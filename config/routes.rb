@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get "/disciplies/:id/join" => "disciplines#join", :as => :join_discipline
   get "/disciplies/:id/exit" => "disciplines#exit", :as => :exit_discipline
-
+  get "/"  => 'users#new'
   get 'login' => 'sessions#new'#, as: :login
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
 end
   resources :exams
   resources :students
-  get "/"  => "home#index", :as => :home
   post "/teste" => "application#teste", :as => :teste
 
   get "/class" => "disciplines#class", :as => :class
