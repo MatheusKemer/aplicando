@@ -22,10 +22,6 @@ http://aplicando.herokuapp.com
 Teacher login: professor@teste.com
 Teacher password: 123456  
 
-Student login: aluno@teste.com 
-Student password: 123456
-
-
 This is an academic project develop by RoR newbies that expected to learn more about a new language and framework, please ignore big mistakes or missunderstanding.
 
 Any doubt, please contact me: 97kemer@gmail.com
